@@ -15,14 +15,22 @@ export class DashboardComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   statsDataSource: MatTableDataSource<Player>;
-  columns: string[] = ['name', 'wins', 'captainWins', 'goals', 'ownGoals'];
+  columns: string[] = ['name', 'gamesPlayed', 'wins', 'captainWins', 'winPct', 'goals', 'ownGoals', 'cleanSheets'];
 
   constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
     this.playerService.getPlayerStats().subscribe((resp: Player[]) => {
+      resp = this.calculateWinPct(resp);
       this.statsDataSource = new MatTableDataSource(resp);
       this.statsDataSource.sort = this.sort;
     });
+  }
+
+  calculateWinPct(stats: Player[]): Player[] {
+    stats.forEach((stat: Player) => {
+      stat.winPct = (stat.wins / stat.gamesPlayed) * 100;
+    });
+    return stats;
   }
 }

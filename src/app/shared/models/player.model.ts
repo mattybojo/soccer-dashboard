@@ -5,4 +5,7 @@ export class Player {
   captainWins: number;
   goals: number;
   ownGoals: number;
+  gamesPlayed: number;
+  cleanSheets: number;
+  winPct?: number;
 }
