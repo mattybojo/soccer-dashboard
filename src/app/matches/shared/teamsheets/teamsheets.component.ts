@@ -54,7 +54,7 @@ export class TeamsheetsComponent implements OnInit {
       if (data.whiteTeam.goals) {
         data.whiteTeam.goals.split(',').forEach((goal: string) => {
           if (goal.includes('OG')) {
-            this.whiteTeamData.find(x => x.name === goal).ownGoals += 1;
+            this.darkTeamData.find(x => x.name === goal.split(' ')[0]).ownGoals += 1;
           } else {
             this.whiteTeamData.find(x => x.name === goal).goals += 1;
           }
@@ -65,7 +65,7 @@ export class TeamsheetsComponent implements OnInit {
       if (data.darkTeam.goals) {
         data.darkTeam.goals.split(',').forEach((goal: string) => {
           if (goal.includes('OG')) {
-            this.darkTeamData.find(x => x.name === goal).ownGoals += 1;
+            this.whiteTeamData.find(x => x.name === goal.split(' ')[0]).ownGoals += 1;
           } else {
             this.darkTeamData.find(x => x.name === goal).goals += 1;
           }
