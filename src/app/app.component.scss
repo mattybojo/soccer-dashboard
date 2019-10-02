@@ -1,0 +1,23 @@
+.mat-nav-list {
+  margin-top: 10px;
+}
+
+.mat-list-item {
+  display: inline !important;
+}
+
+.menu-item-link ::ng-deep .mat-list-item-content {
+  display: inline !important;
+}
+
+.menu-icon {
+  margin-left: 10px;
+}
+
+.menu-item {
+  margin-bottom: 15px;
+}
+
+.menu-item:hover {
+  background-color: #b4bbe4;
+}
