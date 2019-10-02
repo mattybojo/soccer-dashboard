@@ -6,15 +6,15 @@ table {
   display: inline-block;
 }
 
-.white-team {
+.white-team, .white-team-penalties {
   border-right: 1px solid rgba(0,0,0,0.12);
 }
 
-.white-team td {
+.white-team td, .white-team-penalties td {
   text-align: right;
 }
 
-.dark-team td {
+.dark-team td, .dark-team-penalties td {
   text-align: left;
 }
 
@@ -53,4 +53,62 @@ table {
 
 .motm-icon {
   color: goldenrod;
+}
+
+.missed-penalty {
+  color: red;
+}
+
+.white-team-penalties ::ng-deep .mat-column-white-name-penalty, .mat-column-white-scored-penalty {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.dark-team-penalties ::ng-deep .mat-column-dark-name-penalty, .mat-column-dark-scored-penalty {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.white-team-penalties ::ng-deep .mat-column-header-white-team-penalty {
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dark-team-penalties ::ng-deep .mat-column-header-dark-team-penalty {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.penalty-container {
+  margin-top: 5px;
+}
+
+.penalty-label {
+  margin-bottom: 5px;
+}
+
+// Align tables
+.mat-column-goals {
+  width: 100px;
+}
+
+.mat-column-name {
+  width: 150px;
+}
+
+.mat-column-header-white-team-score {
+  width: 250px;
+}
+
+.mat-column-header-dark-team-score {
+  width: 250px;
+}
+
+.mat-column-scored {
+  width: 100px;
+}
+
+.white-team-penalties th {
+  text-align: right;
 }

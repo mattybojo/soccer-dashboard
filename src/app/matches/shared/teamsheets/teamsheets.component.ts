@@ -1,9 +1,9 @@
-import { MatchPlayer } from './../../../shared/models/match.model';
+import { MatchPlayer, PenaltyTaker } from './../../../shared/models/match.model';
 import { Match } from 'src/app/shared/models/match.model';
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { faFutbol, faCrown } from '@fortawesome/free-solid-svg-icons';
+import { faFutbol, faCrown, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { faCuttlefish } from '@fortawesome/free-brands-svg-icons';
 
 @Component({
@@ -15,6 +15,7 @@ export class TeamsheetsComponent implements OnInit {
 
   faFutbol = faFutbol;
   faCrown = faCrown;
+  faTimes = faTimes;
   faCuttlefish = faCuttlefish;
 
   @ViewChild('whiteTeamSort', {static: true}) whiteTeamSort: MatSort;
@@ -23,22 +24,37 @@ export class TeamsheetsComponent implements OnInit {
   whiteTeamDataSource: MatTableDataSource<MatchPlayer>;
   darkTeamDataSource: MatTableDataSource<MatchPlayer>;
 
+  whiteTeamPenaltyDataSource: MatTableDataSource<PenaltyTaker>;
+  darkTeamPenaltyDataSource: MatTableDataSource<PenaltyTaker>;
+
   whiteTeamData: MatchPlayer[] = [];
   darkTeamData: MatchPlayer[] = [];
+
+  whiteTeamPenaltyData: PenaltyTaker[] = [];
+  darkTeamPenaltyData: PenaltyTaker[] = [];
 
   whiteTeamColumns: string[] = ['name', 'goals'];
   darkTeamColumns: string[] = ['goals', 'name'];
 
+  whiteTeamPenaltyColumns: string[] = ['name', 'scored'];
+  darkTeamPenaltyColumns: string[] = ['scored', 'name'];
+
   whiteTeamGoals: number = 0;
   darkTeamGoals: number = 0;
+
+  whiteTeamPenalties: number = 0;
+  darkTeamPenalties: number = 0;
 
   @Input() set matchData(data: Match) {
     if (data) {
       let isCaptain: boolean;
       let isMotm: boolean;
+      let penaltyData: string[];
+      let isPenaltyScored: boolean;
 
       this.resetMatchData();
 
+      // Parse player data
       data.whiteTeam.players.split(',').forEach((player: string, index: number) => {
         isCaptain = (index === 0) ? true : false;
         isMotm = (player === data.motm) ? true : false;
@@ -51,6 +67,7 @@ export class TeamsheetsComponent implements OnInit {
         this.darkTeamData.push({ name: player, goals: 0, ownGoals: 0, isCaptain: isCaptain, isMotm: isMotm });
       });
 
+      // Parse goal data
       if (data.whiteTeam.goals) {
         data.whiteTeam.goals.split(',').forEach((goal: string) => {
           if (goal.includes('OG')) {
@@ -78,6 +95,26 @@ export class TeamsheetsComponent implements OnInit {
 
       this.darkTeamDataSource = new MatTableDataSource(this.darkTeamData);
       this.darkTeamDataSource.sort = this.darkTeamSort;
+
+      // Parse penalty data, if exists
+      if (data.whiteTeam.penalties && data.darkTeam.penalties) {
+        data.whiteTeam.penalties.split(',').forEach((penalty: string) => {
+          penaltyData = penalty.split(':');
+          isPenaltyScored = (penaltyData[1] === 'Y') ? true : false;
+          this.whiteTeamPenalties += (isPenaltyScored) ? 1 : 0;
+          this.whiteTeamPenaltyData.push({ name: penaltyData[0], scored: isPenaltyScored });
+        });
+
+        data.darkTeam.penalties.split(',').forEach((penalty: string) => {
+          penaltyData = penalty.split(':');
+          isPenaltyScored = (penaltyData[1] === 'Y') ? true : false;
+          this.darkTeamPenalties += (isPenaltyScored) ? 1 : 0;
+          this.darkTeamPenaltyData.push({ name: penaltyData[0], scored: isPenaltyScored });
+        });
+
+        this.whiteTeamPenaltyDataSource = new MatTableDataSource(this.whiteTeamPenaltyData);
+        this.darkTeamPenaltyDataSource = new MatTableDataSource(this.darkTeamPenaltyData);
+      }
     }
   }
 
@@ -96,5 +133,11 @@ export class TeamsheetsComponent implements OnInit {
 
     this.whiteTeamGoals = 0;
     this.darkTeamGoals = 0;
+
+    this.whiteTeamPenalties = 0;
+    this.darkTeamPenalties = 0;
+
+    this.whiteTeamPenaltyData = [];
+    this.darkTeamPenaltyData = [];
   }
 }

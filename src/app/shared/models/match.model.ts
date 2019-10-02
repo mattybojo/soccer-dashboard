@@ -8,6 +8,7 @@ export class Match {
 export class Team {
   players: string;
   goals: string;
+  penalties?: string;
 }
 
 export class MatchPlayer {
@@ -16,4 +17,9 @@ export class MatchPlayer {
   ownGoals: number;
   isCaptain: boolean;
   isMotm: boolean;
+}
+
+export class PenaltyTaker {
+  name: string;
+  scored: boolean;
 }

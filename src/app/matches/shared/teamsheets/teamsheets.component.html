@@ -1,6 +1,5 @@
 <div class="teamsheets-container">
   <table mat-table [dataSource]="whiteTeamDataSource" matSort #whiteTeamSort="matSort" class="white-team">
-
     <ng-container matColumnDef="name">
       <th id="white-name" mat-header-cell *matHeaderCellDef arrowPosition='before' mat-sort-header>Name</th>
       <td mat-cell *matCellDef="let entry">
@@ -20,7 +19,7 @@
 
     <ng-container matColumnDef="header-white-team-score">
       <th id="white-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
-        White Team: {{whiteTeamGoals}}
+        White Team: {{whiteTeamGoals}}<span *ngIf="whiteTeamPenalties || darkTeamPenalties"> ({{whiteTeamPenalties}})</span>
       </th>
     </ng-container>
 
@@ -50,7 +49,7 @@
 
     <ng-container matColumnDef="header-dark-team-score">
       <th id="dark-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
-        {{darkTeamGoals}}: Dark Team
+        <span *ngIf="whiteTeamPenalties || darkTeamPenalties">({{darkTeamPenalties}}) </span>{{darkTeamGoals}}: Dark Team
       </th>
     </ng-container>
 
@@ -58,4 +57,62 @@
     <tr mat-header-row *matHeaderRowDef="darkTeamColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: darkTeamColumns;"></tr>
   </table>
+
+  <div class="penalty-container" *ngIf="whiteTeamPenaltyData.length && whiteTeamPenaltyData.length">
+    <h4 class="penalty-label">Penalties</h4>
+    <table mat-table [dataSource]="whiteTeamPenaltyDataSource" class="white-team-penalties">
+      <ng-container matColumnDef="name">
+        <th id="white-name-penalty" mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let entry">
+          <span>{{entry.name}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="scored">
+        <th id="white-scored-penalty" mat-header-cell *matHeaderCellDef>Scored</th>
+        <td mat-cell *matCellDef="let entry">
+          <fa-icon [icon]="faFutbol" *ngIf="entry.scored"></fa-icon>
+          <fa-icon [icon]="faTimes" class="missed-penalty" *ngIf="!entry.scored"></fa-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="header-white-team-penalty">
+        <th id="white-team-penalty" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+          White Team: {{whiteTeamPenalties}}
+        </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['header-white-team-penalty']"></tr>
+      <tr mat-header-row *matHeaderRowDef="whiteTeamPenaltyColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: whiteTeamPenaltyColumns;"></tr>
+    </table>
+
+    <table mat-table [dataSource]="darkTeamPenaltyDataSource" class="dark-team-penalties">
+
+      <ng-container matColumnDef="scored">
+        <th id="dark-scored-penalty" mat-header-cell *matHeaderCellDef>Scored</th>
+        <td mat-cell *matCellDef="let entry">
+          <fa-icon [icon]="faFutbol" *ngIf="entry.scored"></fa-icon>
+          <fa-icon [icon]="faTimes" class="missed-penalty" *ngIf="!entry.scored"></fa-icon>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <th id="dark-name-penalty" mat-header-cell *matHeaderCellDef>Name</th>
+        <td mat-cell *matCellDef="let entry">
+          <span>{{entry.name}}</span>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="header-dark-team-penalty">
+        <th id="dark-team-penalty" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+          {{darkTeamPenalties}}: Dark Team
+        </th>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="['header-dark-team-penalty']"></tr>
+      <tr mat-header-row *matHeaderRowDef="darkTeamPenaltyColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: darkTeamPenaltyColumns;"></tr>
+    </table>
+  </div>
 </div>
