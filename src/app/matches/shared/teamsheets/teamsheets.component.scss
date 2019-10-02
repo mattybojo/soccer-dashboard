@@ -1,0 +1,56 @@
+.teamsheets-container {
+  text-align: center;
+}
+
+table {
+  display: inline-block;
+}
+
+.white-team {
+  border-right: 1px solid rgba(0,0,0,0.12);
+}
+
+.white-team td {
+  text-align: right;
+}
+
+.dark-team td {
+  text-align: left;
+}
+
+.white-team ::ng-deep .mat-column-white-name, .mat-column-white-goals {
+  text-align: right;
+  justify-content: flex-end;
+}
+
+.dark-team ::ng-deep .mat-column-dark-name, .mat-column-dark-goals {
+  text-align: left;
+  justify-content: flex-start;
+}
+
+.white-team ::ng-deep .mat-column-header-white-team-score {
+  text-align: right;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.dark-team ::ng-deep .mat-column-header-dark-team-score {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.own-goal {
+  color: red;
+}
+
+.white-team-icon {
+  margin-right: 5px;
+}
+
+.dark-team-icon {
+  margin-left: 5px;
+}
+
+.motm-icon {
+  color: goldenrod;
+}

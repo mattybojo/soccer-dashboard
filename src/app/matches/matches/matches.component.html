@@ -1,0 +1,12 @@
+<div class="select-container">
+  <mat-form-field>
+    <mat-label>Matches</mat-label>
+    <mat-select [(value)]="selectedMatch" (selectionChange)="onSelectionChange($event)">
+      <mat-option *ngFor="let dateOption of dateOptions" [value]="dateOption">
+        {{dateOption}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<efl-teamsheets [matchData]="match"></efl-teamsheets>

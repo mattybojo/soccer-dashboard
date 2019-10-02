@@ -1,0 +1,61 @@
+<div class="teamsheets-container">
+  <table mat-table [dataSource]="whiteTeamDataSource" matSort #whiteTeamSort="matSort" class="white-team">
+
+    <ng-container matColumnDef="name">
+      <th id="white-name" mat-header-cell *matHeaderCellDef arrowPosition='before' mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let entry">
+        <fa-icon [icon]="faCrown" class="white-team-icon motm-icon" *ngIf="entry.isMotm"></fa-icon>
+        <fa-icon [icon]="faCuttlefish" class="white-team-icon" *ngIf="entry.isCaptain"></fa-icon>
+        <span>{{entry.name}}</span>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="goals">
+      <th id="white-goals" mat-header-cell *matHeaderCellDef arrowPosition='before' mat-sort-header>Goals</th>
+      <td mat-cell *matCellDef="let entry">
+        <fa-icon [icon]="faFutbol" *ngFor="let item of [].constructor(entry.goals)"></fa-icon>
+        <fa-icon [icon]="faFutbol" *ngFor="let item of [].constructor(entry.ownGoals)" class="own-goal"></fa-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="header-white-team-score">
+      <th id="white-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+        White Team: {{whiteTeamGoals}}
+      </th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['header-white-team-score']"></tr>
+    <tr mat-header-row *matHeaderRowDef="whiteTeamColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: whiteTeamColumns;"></tr>
+  </table>
+
+  <table mat-table [dataSource]="darkTeamDataSource" matSort #darkTeamSort="matSort" class="dark-team">
+
+    <ng-container matColumnDef="goals">
+      <th id="dark-goals" mat-header-cell *matHeaderCellDef mat-sort-header>Goals</th>
+      <td mat-cell *matCellDef="let entry">
+        <fa-icon [icon]="faFutbol" *ngFor="let item of [].constructor(entry.goals)"></fa-icon>
+        <fa-icon [icon]="faFutbol" *ngFor="let item of [].constructor(entry.ownGoals)" class="own-goal"></fa-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="name">
+      <th id="dark-name" mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let entry">
+        <span>{{entry.name}}</span>
+        <fa-icon [icon]="faCuttlefish" class="dark-team-icon" *ngIf="entry.isCaptain"></fa-icon>
+        <fa-icon [icon]="faCrown" class="dark-team-icon motm-icon" *ngIf="entry.isMotm"></fa-icon>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="header-dark-team-score">
+      <th id="dark-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+        {{darkTeamGoals}}: Dark Team
+      </th>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['header-dark-team-score']"></tr>
+    <tr mat-header-row *matHeaderRowDef="darkTeamColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: darkTeamColumns;"></tr>
+  </table>
+</div>
