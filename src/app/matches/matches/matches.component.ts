@@ -55,5 +55,10 @@ export class MatchesComponent implements OnInit {
 
   onSelectionChange($event) {
     this.match = this.matches.find(x => x.date === $event.value);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { date: $event.value },
+      queryParamsHandling: 'merge'
+    });
   }
 }
