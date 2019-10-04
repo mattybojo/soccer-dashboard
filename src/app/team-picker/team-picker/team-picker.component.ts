@@ -80,6 +80,10 @@ export class TeamPickerComponent implements OnInit {
     return availablePlayers;
   }
 
+  arePlayersAvailable(): boolean {
+    return (!!this.availablePlayers.length && !!this.availablePlayers[0].length) || !!this.selectedPlayer;
+  }
+
   drop(event: CdkDragDrop<string[]>, isReorderList: boolean): void {
     if (event.previousContainer !== event.container) {
       if (isReorderList) {

@@ -1,6 +1,6 @@
 <div cdkDropListGroup class="team-picker-container" *ngIf="teamData$ | async as teamData">
   <!-- Available players -->
-  <div class="player-container">
+  <div class="player-container" *ngIf="arePlayersAvailable()">
     <h2 class="droplist-label">Available</h2>
 
     <div
