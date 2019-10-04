@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { TeamPicker } from './models/team-picker.model';
+import { TeamPicker } from '../models/team-picker.model';
 import { Observable, from } from 'rxjs';
-import { convertSnaps } from './services/db-utils';
+import { convertSnaps } from './db-utils';
 import { map } from 'rxjs/operators';
 
 @Injectable({
