@@ -1,0 +1,44 @@
+<div cdkDropListGroup class="team-picker-container" *ngIf="teamData$ | async as teamData">
+  <!-- Available players -->
+  <div class="player-container">
+    <h2 class="droplist-label">Available</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="parseAvailablePlayers()"
+      class="example-list"
+      (cdkDropListDropped)="drop($event, false)">
+      <div class="example-box" *ngFor="let player of availablePlayers" cdkDrag [cdkDragDisabled]="isAvailablePlayerDisabled(teamData.myTeam, teamData.opposingTeam)">{{player}}</div>
+    </div>
+  </div>
+
+  <!-- My team -->
+  <div class="player-container">
+    <h2 class="droplist-label">{{teamData.myTeamLabel}}</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="parsePlayerList(teamData.myTeam, true)"
+      class="example-list"
+      (cdkDropListDropped)="drop($event, true)"
+      *ngIf="teamsData && teamsData[0]">
+      <div class="example-box" *ngFor="let player of parsePlayerList(teamData.myTeam, true)" cdkDrag [cdkDragDisabled]="isTeamPlayerDisabled(player)">
+        {{player}}
+        <button mat-stroked-button color="primary" (click)="onSubmit(teamData.id, teamData.myTeam)" *ngIf="selectedPlayer === player" [disabled]="isConfirmDisabled">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Opposing team -->
+  <div class="player-container">
+    <h2 class="droplist-label">{{teamData.opposingTeamLabel}}</h2>
+
+    <div
+      cdkDropList
+      [cdkDropListData]="parsePlayerList(teamData.opposingTeam, false)"
+      class="example-list"
+      [cdkDropListEnterPredicate]="noReturnPredicate">
+      <div class="example-box" *ngFor="let player of parsePlayerList(teamData.opposingTeam, false)">{{player}}</div>
+    </div>
+  </div>
+</div>

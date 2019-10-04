@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from './shared/models/menu.model';
-import { faTable, faFutbol } from '@fortawesome/free-solid-svg-icons';
+import { faTable, faFutbol, faUsers } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -12,9 +12,11 @@ export class AppComponent implements OnInit {
   menuItems: MenuItem[] = [];
   faTable = faTable;
   faFutbol = faFutbol;
+  faUsers = faUsers;
 
   ngOnInit(): void {
     this.menuItems.push({ label: 'Dashboard', link: '/dashboard', icon: faTable});
     this.menuItems.push({ label: 'Matches', link: '/matches', icon: faFutbol, queryParams: {date: 'latest'}});
+    this.menuItems.push({ label: 'Team Picker', link: '/team-picker', icon: faUsers});
   }
 }

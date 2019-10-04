@@ -1,4 +1,3 @@
-
 import * as firebase from 'firebase';
 
 const config = {
@@ -26,6 +25,7 @@ async function uploadData() {
   uploadPlayers();
   uploadStats();
   uploadMatches();
+  uploadTeamPicker();
 }
 
 async function uploadPlayers() {
@@ -479,6 +479,16 @@ async function uploadMatches() {
       goals: 'JM,Daniel,Sab (OG),JM,Daniel'
     },
     motm: ''
+  });
+}
+
+async function uploadTeamPicker() {
+  const teamPicker = db.collection('teamPicker');
+
+  teamPicker.add({
+    availablePlayers: 'Kenneth,Zoran,Shane,Igor,Goce,Sundev,Matt Bojo,Daniel',
+    darkTeam: '',
+    whiteTeam: ''
   });
 }
 

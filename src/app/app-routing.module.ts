@@ -12,6 +12,9 @@ const routes: Routes = [{
 }, {
   path: 'matches',
   loadChildren: './matches/matches.module#MatchesModule'
+}, {
+  path: 'team-picker',
+  loadChildren: './team-picker/team-picker.module#TeamPickerModule'
 }];
 
 @NgModule({
