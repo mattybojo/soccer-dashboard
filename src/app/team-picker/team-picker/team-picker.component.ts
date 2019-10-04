@@ -1,4 +1,4 @@
-import { TeamPickerService } from './../../shared/team-picker.service';
+import { TeamPickerService } from '../../shared/services/team-picker.service';
 import { TeamPicker, TeamData, FormattedTeamPicker } from './../../shared/models/team-picker.model';
 import { Component, OnInit } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';

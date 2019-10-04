@@ -26,6 +26,7 @@ async function uploadData() {
   uploadStats();
   uploadMatches();
   uploadTeamPicker();
+  uploadChats();
 }
 
 async function uploadPlayers() {
@@ -489,6 +490,78 @@ async function uploadTeamPicker() {
     availablePlayers: 'Kenneth,Zoran,Shane,Igor,Goce,Sundev,Matt Bojo,Daniel',
     darkTeam: '',
     whiteTeam: ''
+  });
+}
+
+async function uploadChats() {
+  const chat = db.collection('chat');
+
+  chat.add({
+    user: 'system',
+    message: 'White has picked Shane',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:11:22'))
+  });
+
+  chat.add({
+    user: 'system',
+    message: 'Dark has picked Christian',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:12:24'))
+  });
+
+  chat.add({
+    user: 'white',
+    message: 'Hey, I wanted to pick him lol',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:15:01'))
+  });
+
+  chat.add({
+    user: 'dark',
+    message: 'I\'ll trade him for Daniel',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:16:04'))
+  });
+
+  chat.add({
+    user: 'white',
+    message: 'No thanks',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:16:20'))
+  });
+
+  chat.add({
+    user: 'system',
+    message: 'White has picked Cosmin',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:16:30'))
+  });
+
+  chat.add({
+    user: 'dark',
+    message: 'Whoa, great pick!',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:21:46'))
+  });
+
+  chat.add({
+    user: 'dark',
+    message: 'Just you wait...',
+    timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:21:51'))
+  });
+
+  chat.add({
+    user: 'white',
+    message: 'Hahahaha', timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:21:59'))
+  });
+
+  chat.add({
+    user: 'system',
+    message: 'Dark has picked Cosmin', timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:22:00'))
+  });
+
+  chat.add({
+    user: 'white',
+    message: 'Interesting...', timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:22:10'))
+  });
+
+  chat.add({
+    user: 'dark',
+    message: 'We\'re gonna win this week', timestamp: firebase.firestore.Timestamp.fromDate(new Date('2019-10-01T13:22:30'))
   });
 }
 
