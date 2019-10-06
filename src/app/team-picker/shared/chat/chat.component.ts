@@ -5,6 +5,7 @@ import { CdkTextareaAutosize } from '@angular/cdk/text-field';
 import { ChatService } from 'src/app/shared/services/chat.service';
 import { Observable } from 'rxjs';
 import { orderBy } from 'lodash';
+import { DocumentReference } from '@angular/fire/firestore';
 
 @Component({
   selector: 'efl-chat',
@@ -39,11 +40,15 @@ export class ChatComponent implements OnInit {
   onSubmit() {
     if (!this.isMessageSending) {
       this.isMessageSending = true;
-      this.chatService.saveMessage(this.chatInput, this.team).subscribe(() => {
+      this.sendMessage(this.team, this.chatInput).subscribe(() => {
         this.chatInput = '';
         this.isMessageSending = false;
       });
     }
+  }
+
+  sendMessage(team: string, chatMsg: string): Observable<DocumentReference> {
+    return this.chatService.saveMessage(team, chatMsg);
   }
 
   scrollToBottom() {

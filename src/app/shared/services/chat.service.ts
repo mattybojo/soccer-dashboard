@@ -22,7 +22,7 @@ export class ChatService {
       );
   }
 
-  saveMessage(msg: string, team: string): Observable<DocumentReference> {
+  saveMessage(team: string, msg: string): Observable<DocumentReference> {
     const chatMsg: ChatMessage = { user: team, message: msg, timestamp: firestore.Timestamp.fromMillis(Date.now()) };
     return from(this.db.collection('chat').add({ ...chatMsg }));
   }

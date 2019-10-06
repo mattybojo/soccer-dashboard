@@ -1,6 +1,7 @@
+import { ChatComponent } from './../shared/chat/chat.component';
 import { TeamPickerService } from '../../shared/services/team-picker.service';
 import { TeamPicker, TeamData, FormattedTeamPicker } from './../../shared/models/team-picker.model';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { HttpParams } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
@@ -13,6 +14,8 @@ import { mergeMap } from 'rxjs/operators';
 })
 export class TeamPickerComponent implements OnInit {
 
+  @ViewChild('chat', { static: false }) chat: ChatComponent;
+
   pickerData: TeamPicker;
   teamsData: [TeamData, TeamData] = [new TeamData(), new TeamData()];
   availablePlayers: string[];
@@ -21,6 +24,8 @@ export class TeamPickerComponent implements OnInit {
   currentTeamData: Partial<TeamPicker>;
   team: string;
   teamData$: Observable<FormattedTeamPicker>;
+  whiteCaptain: string;
+  darkCaptain: string;
 
   constructor(private teamPickerService: TeamPickerService) {}
 
@@ -51,6 +56,8 @@ export class TeamPickerComponent implements OnInit {
             picker.opposingTeam = picker.whiteTeam;
             picker.opposingTeamLabel = 'White Team';
           }
+          this.whiteCaptain = picker.whiteTeam.split(',')[0];
+          this.darkCaptain = picker.whiteTeam.split(',')[0];
           this.availablePlayers = picker.availablePlayers.split(',');
           return of(picker);
         })
@@ -150,6 +157,8 @@ export class TeamPickerComponent implements OnInit {
   }
 
   onSubmit(collectionId: string, myTeam: string): void {
+    const currentCaptain: string = (this.team === 'white') ? this.whiteCaptain : this.darkCaptain;;
+    const currentPlayer = this.selectedPlayer;
     // Disable button
     this.isConfirmDisabled = true;
 
@@ -163,6 +172,10 @@ export class TeamPickerComponent implements OnInit {
     this.selectedPlayer = null;
 
     // Save to firebase
-    this.teamPickerService.saveTeamData(this.currentTeamData).subscribe(() => this.isConfirmDisabled = false);
+    this.teamPickerService.saveTeamData(this.currentTeamData).subscribe(() => {
+      this.chat.sendMessage('system', `${currentCaptain} selected ${currentPlayer}`).subscribe(() => {
+        this.isConfirmDisabled = false;
+      });
+    });
   }
 }
