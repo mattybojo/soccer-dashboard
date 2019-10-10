@@ -32,7 +32,7 @@ async function uploadData() {
 async function uploadPlayers() {
   const players = db.collection('players');
 
-  const playerList: string[] = ['Akachi', 'Anson', 'Ashan', 'Christian', 'Daniel', 'Eric', 'Fernando', 'Goce',
+  const playerList: string[] = ['Akachi', 'Anson', 'Ashan', 'Christian', 'Cosmin', 'Daniel', 'Eric', 'Fernando', 'Goce',
     'Igor', 'Jason', 'Jeff', 'JM', 'Joe', 'Johan', 'John', 'Kenneth', 'Matt Bojo', 'Matt Brunson', 'Matt Weaver',
     'Mike', 'Nawid', 'Sab', 'Shane', 'Sina', 'Sundev', 'Uffe', 'Vishnu', 'Vlad', 'Walt', 'Zoran'];
 
@@ -56,41 +56,41 @@ async function uploadStats() {
 
   season1.add({
     name: 'Anson',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 4,
+    gamesPlayed: 5,
     cleanSheets: 0
   });
 
   season1.add({
     name: 'Ashan',
-    wins: 2,
+    wins: 3,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 4,
     cleanSheets: 1
   });
 
   season1.add({
     name: 'Christian',
-    wins: 3,
+    wins: 4,
     captainWins: 0,
     goals: 5,
     ownGoals: 0,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 0
   });
 
   season1.add({
     name: 'Daniel',
-    wins: 3,
+    wins: 4,
     captainWins: 1,
-    goals: 5,
+    goals: 6,
     ownGoals: 0,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 1
   });
 
@@ -106,11 +106,11 @@ async function uploadStats() {
 
   season1.add({
     name: 'Fernando',
-    wins: 3,
+    wins: 4,
     captainWins: 0,
     goals: 1,
     ownGoals: 1,
-    gamesPlayed: 8,
+    gamesPlayed: 9,
     cleanSheets: 1
   });
 
@@ -120,7 +120,7 @@ async function uploadStats() {
     captainWins: 0,
     goals: 2,
     ownGoals: 0,
-    gamesPlayed: 8,
+    gamesPlayed: 9,
     cleanSheets: 1
   });
 
@@ -138,9 +138,9 @@ async function uploadStats() {
     name: 'Jason',
     wins: 2,
     captainWins: 0,
-    goals: 2,
+    goals: 3,
     ownGoals: 0,
-    gamesPlayed: 5,
+    gamesPlayed: 6,
     cleanSheets: 1
   });
 
@@ -156,21 +156,21 @@ async function uploadStats() {
 
   season1.add({
     name: 'JM',
-    wins: 6,
+    wins: 7,
     captainWins: 0,
-    goals: 10,
+    goals: 11,
     ownGoals: 0,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 1
   });
 
   season1.add({
     name: 'Joe',
-    wins: 4,
-    captainWins: 0,
-    goals: 4,
+    wins: 5,
+    captainWins: 1,
+    goals: 5,
     ownGoals: 0,
-    gamesPlayed: 7,
+    gamesPlayed: 8,
     cleanSheets: 1
   });
 
@@ -180,7 +180,7 @@ async function uploadStats() {
     captainWins: 1,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 8,
+    gamesPlayed: 9,
     cleanSheets: 2
   });
 
@@ -190,7 +190,7 @@ async function uploadStats() {
     captainWins: 1,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 9,
+    gamesPlayed: 10,
     cleanSheets: 2
   });
 
@@ -200,17 +200,17 @@ async function uploadStats() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 0
   });
 
   season1.add({
     name: 'Matt Bojo',
-    wins: 2,
+    wins: 3,
     captainWins: 1,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 5,
+    gamesPlayed: 6,
     cleanSheets: 1
   });
 
@@ -238,9 +238,9 @@ async function uploadStats() {
     name: 'Mike',
     wins: 4,
     captainWins: 1,
-    goals: 0,
+    goals: 1,
     ownGoals: 0,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 0
   });
 
@@ -250,17 +250,17 @@ async function uploadStats() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 4,
+    gamesPlayed: 5,
     cleanSheets: 0
   });
 
   season1.add({
     name: 'Sab',
-    wins: 5,
+    wins: 6,
     captainWins: 1,
     goals: 1,
     ownGoals: 1,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 2
   });
 
@@ -271,7 +271,7 @@ async function uploadStats() {
     captainWins: 1,
     goals: 2,
     ownGoals: 0,
-    gamesPlayed: 10,
+    gamesPlayed: 11,
     cleanSheets: 2
   });
 
@@ -301,7 +301,7 @@ async function uploadStats() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 3,
     cleanSheets: 0
   });
 
@@ -311,7 +311,7 @@ async function uploadStats() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 4,
     cleanSheets: 0
   });
 
@@ -321,7 +321,7 @@ async function uploadStats() {
     captainWins: 1,
     goals: 8,
     ownGoals: 0,
-    gamesPlayed: 7,
+    gamesPlayed: 8,
     cleanSheets: 1
   });
 
@@ -337,11 +337,11 @@ async function uploadStats() {
 
   season1.add({
     name: 'Zoran',
-    wins: 6,
+    wins: 7,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 9,
+    gamesPlayed: 10,
     cleanSheets: 1
   });
 }
@@ -349,6 +349,20 @@ async function uploadStats() {
 async function uploadMatches() {
   const matches = db.collection('matches');
 
+  matches.add({
+    date: '10-05-2019',
+    whiteTeam: {
+      players: 'Goce,Shane,Johan,Vlad,Kenneth,Jason,Mike,Vishnu,John,Nawid,Uffe',
+      goals: 'Jason,Mike',
+      penalties: 'Zoran:Y,Joe:Y,Christian:Y,Fernando:Y'
+    },
+    darkTeam: {
+      players: 'Joe,Zoran,Christian,JM,Sab,Fernando,Daniel,Ashan,Matt Bojo,Cosmin,Anson',
+      goals: 'Daniel,JM',
+      penalties: 'Johan:Y,Goce:Y,Vlad:N,Shane:Y'
+    },
+    motm: ''
+  });
 
   matches.add({
     date: '09-28-2019',
