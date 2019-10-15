@@ -2,7 +2,7 @@ import { UserData } from './../models/user-data.model';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
-import { from, Observable } from 'rxjs';
+import { from, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { convertSnap } from './db-utils';
 
@@ -11,18 +11,7 @@ import { convertSnap } from './db-utils';
 })
 export class AuthService {
 
-  private user: firebase.User;
-
-  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
-    this.afAuth.authState.subscribe((user: firebase.User) => {
-      if (user) {
-        console.log(user);
-        this.user = user;
-      } else {
-        this.user = null;
-      }
-    });
-  }
+  constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {}
 
   saveUserData(user: firebase.User, isNewUser: boolean): Observable<DocumentReference> {
     let userData: UserData = new UserData();
@@ -31,15 +20,20 @@ export class AuthService {
       if (isNewUser) {
         return from(this.db.collection('userData').add({ ...userData }));
       } else {
-        this.db.collection('userData', ref => ref.where('uid', '==', user.uid))
-        .snapshotChanges()
-        .pipe(
-          map(snap => convertSnap<UserData>(snap))
-        ).subscribe((dbUserData: UserData) => {
-          this.setUserData(dbUserData, user);
+        this.getUserData(user.uid).subscribe((dbUserData: UserData) => {
+          const newData: UserData = this.setUserData(dbUserData, user);
+          this.db.doc(`userData/${newData.id}`).update(newData);
         });
       }
     }
+  }
+
+  private getUserData(uid: string): Observable<UserData> {
+    return this.db.collection('userData', ref => ref.where('uid', '==', uid))
+      .snapshotChanges()
+      .pipe(
+        map(snap => convertSnap<UserData>(snap))
+      );
   }
 
   private setUserData(userData: UserData, user: firebase.User) {
@@ -49,11 +43,23 @@ export class AuthService {
     userData.photoUrl = userData.photoUrl || user.photoURL;
     userData.uid = userData.uid || user.uid;
     userData.phoneNumber = userData.phoneNumber || user.phoneNumber;
-    userData.isAdmin = false;
+    userData.isAdmin = userData.isAdmin || false;
 
     window.localStorage.setItem('user', JSON.stringify(userData));
 
     return userData;
+  }
+
+  isAdmin(): Observable<boolean> {
+    const storedUser = window.localStorage.getItem('user');
+    const uid = storedUser ? JSON.parse(storedUser).uid : null;
+    if (null == uid) {
+      return of(false);
+    }
+    return this.getUserData(uid)
+      .pipe(
+        map(userData => userData.isAdmin)
+      );
   }
 
   getUserAuth(): Observable<firebase.User> {
@@ -61,11 +67,11 @@ export class AuthService {
   }
 
   isLoggedIn(): boolean {
-    const storage = window.localStorage.getItem('user');
-    return (null != this.user) || (storage ? storage.length > 0 : false);
+    const storedUser = window.localStorage.getItem('user');
+    return (null != this.afAuth.auth.currentUser) || (storedUser ? storedUser.length > 0 : false);
   }
 
-  logout() {
+  logout(): void {
     window.localStorage.removeItem('user');
     this.afAuth.auth.signOut();
   }

@@ -16,12 +16,11 @@ export class LoginComponent implements OnInit {
   }
 
   successCallback(resp: FirebaseUISignInSuccessWithAuthResult) {
-    console.log(resp);
     this.authService.saveUserData(resp.authResult.user, resp.authResult.additionalUserInfo.isNewUser);
     this.router.navigateByUrl('/dashboard');
   }
 
   errorCallback(errorData: FirebaseUISignInFailure) {
-    console.log(errorData);
+    console.error('Error logging in!');
   }
 }
