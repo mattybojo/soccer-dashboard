@@ -2,6 +2,7 @@
 
 # project-specific
 /src/app/config
+.firebase/
 
 # compiled output
 /dist
