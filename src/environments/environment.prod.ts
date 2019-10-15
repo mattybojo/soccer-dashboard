@@ -1,13 +1,5 @@
+import { firebaseConfig } from '../app/config/firebase.config';
 export const environment = {
   production: true,
-  firebase: {
-    apiKey: '',
-    authDomain: '',
-    databaseURL: '',
-    projectId: '',
-    storageBucket: '',
-    messagingSenderId: '',
-    appId: '',
-    measurementId: ''
-  }
+  firebase: firebaseConfig
 };

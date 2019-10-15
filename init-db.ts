@@ -1,15 +1,7 @@
+import { firebaseConfig } from './src/app/config/firebase.config';
 import * as firebase from 'firebase';
 
-const config = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
-  appId: '',
-  measurementId: ''
-};
+const config = firebaseConfig;
 
 console.log('Uploading data to the database with the following config:\n');
 

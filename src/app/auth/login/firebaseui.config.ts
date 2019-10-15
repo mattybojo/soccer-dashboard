@@ -1,7 +1,7 @@
 import * as firebase from 'firebase';
 import * as firebaseui from 'firebaseui';
 
-export const firebaseConfig = {
+export const firebaseUiConfig = {
   signInFlow: 'popup',
   signInOptions: [
     firebase.auth.GoogleAuthProvider.PROVIDER_ID,

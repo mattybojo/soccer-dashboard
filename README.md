@@ -2,6 +2,21 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.2.
 
+## Configuration needed
+
+Before running the application, create a folder named config under src/app.  In this folder, create a file named firebase.config.ts.  Paste your firebase config inside, using the below as a template:
+
+export const firebaseConfig = {
+  apiKey: <YOUR_DATA_HERE>,
+  authDomain: <YOUR_DATA_HERE>,
+  databaseURL: <YOUR_DATA_HERE>,
+  projectId: <YOUR_DATA_HERE>,
+  storageBucket: <YOUR_DATA_HERE>,
+  messagingSenderId: <YOUR_DATA_HERE>,
+  appId: <YOUR_DATA_HERE>,
+  measurementId: <YOUR_DATA_HERE>
+};
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.

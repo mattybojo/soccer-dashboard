@@ -4,9 +4,9 @@ import { LoginComponent } from './login/login.component';
 import { AuthRoutingModule } from './auth-routing.module';
 import { MatButtonModule } from '@angular/material/button';
 import { FirebaseUIModule } from 'firebaseui-angular';
-import { firebaseConfig } from './login/firebaseui.config';
+import { firebaseUiConfig } from './login/firebaseui.config';
 
-const firebaseUiAuthConfig: firebaseui.auth.Config = firebaseConfig;
+const firebaseUiAuthConfig: firebaseui.auth.Config = firebaseUiConfig;
 
 @NgModule({
   declarations: [LoginComponent],
