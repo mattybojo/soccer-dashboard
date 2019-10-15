@@ -4,6 +4,8 @@
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>Estadio Fallon Liga</h1>
+    <button mat-flat-button color="primary" class="login-btn" [routerLink]="'/auth/login'" *ngIf="!authService.isLoggedIn()">Login</button>
+    <button mat-flat-button color="primary" class="logout-btn" (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
 

@@ -14,6 +14,11 @@ import { environment } from 'src/environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { FirebaseUIModule } from 'firebaseui-angular';
+import { firebaseConfig } from './auth/login/firebaseui.config';
+
+const firebaseUiAuthConfig: firebaseui.auth.Config = firebaseConfig;
 
 @NgModule({
   declarations: [
@@ -30,7 +35,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatListModule,
     MatButtonModule,
     MatIconModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AngularFireAuthModule,
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]

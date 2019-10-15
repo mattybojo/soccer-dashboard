@@ -15,6 +15,9 @@ const routes: Routes = [{
 }, {
   path: 'team-picker',
   loadChildren: './team-picker/team-picker.module#TeamPickerModule'
+}, {
+  path: 'auth',
+  loadChildren: './auth/auth.module#AuthModule'
 }];
 
 @NgModule({
