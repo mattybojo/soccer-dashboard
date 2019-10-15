@@ -49,6 +49,7 @@ export class AuthService {
     userData.photoUrl = userData.photoUrl || user.photoURL;
     userData.uid = userData.uid || user.uid;
     userData.phoneNumber = userData.phoneNumber || user.phoneNumber;
+    userData.isAdmin = false;
 
     window.localStorage.setItem('user', JSON.stringify(userData));
 

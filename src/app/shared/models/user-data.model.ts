@@ -6,4 +6,5 @@ export class UserData {
   emailVerified: boolean;
   uid: string;
   phoneNumber: string;
+  isAdmin: boolean;
 }
