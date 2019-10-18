@@ -5,14 +5,14 @@ export class TeamPicker {
   darkTeam: string;
 }
 
-export class FormattedTeamPicker extends TeamPicker {
-  myTeam?: string;
-  myTeamLabel?: string;
-  opposingTeam?: string;
-  opposingTeamLabel?: string;
-}
-
 export class TeamData {
   players: string[];
   label: string;
+  captain: string;
+}
+
+export enum TeamType {
+  AVAILABLE = 0,
+  MY_TEAM = 1,
+  OPP_TEAM = 2
 }

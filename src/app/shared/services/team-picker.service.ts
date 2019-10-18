@@ -21,7 +21,7 @@ export class TeamPickerService {
       );
   }
 
-  saveTeamData(teamData: Partial<TeamPicker>): Observable<void> {
+  saveTeamData(teamData: TeamPicker): Observable<void> {
     return from(this.db.doc(`teamPicker/${teamData.id}`).update(Object.assign({}, teamData)));
   }
 }

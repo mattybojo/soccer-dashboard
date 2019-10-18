@@ -1,11 +1,10 @@
 import { ChatComponent } from './../shared/chat/chat.component';
 import { TeamPickerService } from '../../shared/services/team-picker.service';
-import { TeamPicker, TeamData, FormattedTeamPicker } from './../../shared/models/team-picker.model';
+import { TeamPicker, TeamData, TeamType } from './../../shared/models/team-picker.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { CdkDragDrop } from '@angular/cdk/drag-drop';
 import { HttpParams } from '@angular/common/http';
-import { Observable, of } from 'rxjs';
-import { mergeMap } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-team-picker',
@@ -16,165 +15,111 @@ export class TeamPickerComponent implements OnInit {
 
   @ViewChild('chat', { static: false }) chat: ChatComponent;
 
+  TeamType: TeamType;
   pickerData: TeamPicker;
-  teamsData: [TeamData, TeamData] = [new TeamData(), new TeamData()];
-  availablePlayers: string[];
-  selectedPlayer: string;
-  isConfirmDisabled: boolean = false;
-  currentTeamData: Partial<TeamPicker>;
+  teamsData: [TeamData, TeamData, TeamData] = [new TeamData(), new TeamData(), new TeamData()];
+  isConfirmDisabled: boolean = true;
   team: string;
-  teamData$: Observable<FormattedTeamPicker>;
-  whiteCaptain: string;
-  darkCaptain: string;
+  teamData$: Observable<TeamPicker[]>;
+  playerCounts: [number, number, number];
+  showConfirmBtn: boolean = false;
 
   constructor(private teamPickerService: TeamPickerService) {}
 
   ngOnInit() {
     const url: string = window.location.href;
+    let myTeam: string;
     if (url.includes('?')) {
       const httpParams = new HttpParams({ fromString: url.split('?')[1] });
-      this.team = httpParams.get('team');
+      myTeam = httpParams.get('team');
+      this.team = (myTeam === 'white' || myTeam === 'dark') ? myTeam : null;
     }
     this.processTeamPickerResponse();
   }
 
   processTeamPickerResponse(): void {
-    let picker: FormattedTeamPicker;
+    let playerList: string[];
+    let availableCount: number;
+    let myTeamCount: number;
+    let oppTeamCount: number;
 
     this.teamData$ = this.teamPickerService.getTeamData()
       .pipe(
-        mergeMap((teamPicker: TeamPicker[]) => {
-          picker = teamPicker[0];
-          if (this.team === 'white' || !this.team) {
-            picker.myTeam = picker.whiteTeam;
-            picker.myTeamLabel = 'White Team';
-            picker.opposingTeam = picker.darkTeam;
-            picker.opposingTeamLabel = 'Dark Team';
-          } else if (this.team === 'dark') {
-            picker.myTeam = picker.darkTeam;
-            picker.myTeamLabel = 'Dark Team';
-            picker.opposingTeam = picker.whiteTeam;
-            picker.opposingTeamLabel = 'White Team';
+        tap((teamPicker: TeamPicker[]) => {
+          this.pickerData = teamPicker[0];
+
+          playerList = this.pickerData.availablePlayers.split(',');
+          playerList = (playerList && playerList.length > 0 && playerList[0].length > 0) ? playerList : null;
+          this.teamsData[TeamType.AVAILABLE] = { players: playerList, captain: null, label: 'Available'};
+          availableCount = (playerList) ? playerList.length : 0;
+
+          if (this.team === 'white') {
+            playerList = this.pickerData.whiteTeam.split(',');
+            this.teamsData[TeamType.MY_TEAM] = { players: playerList, captain: playerList[0], label: 'White Team'};
+            myTeamCount = playerList.length;
+            playerList = this.pickerData.darkTeam.split(',');
+            this.teamsData[TeamType.OPP_TEAM] = { players: playerList, captain: playerList[0], label: 'Dark Team'};
+            oppTeamCount = playerList.length;
+
+          } else if (this.team === 'dark' || !this.team) {
+            playerList = this.pickerData.darkTeam.split(',');
+            this.teamsData[TeamType.MY_TEAM] = { players: playerList, captain: playerList[0], label: 'Dark Team'};
+            myTeamCount = playerList.length;
+            playerList = this.pickerData.whiteTeam.split(',');
+            this.teamsData[TeamType.OPP_TEAM] = { players: playerList, captain: playerList[0], label: 'White Team'};
+            oppTeamCount = playerList.length;
           }
-          this.whiteCaptain = picker.whiteTeam.split(',')[0];
-          this.darkCaptain = picker.whiteTeam.split(',')[0];
-          this.availablePlayers = picker.availablePlayers.split(',');
-          return of(picker);
+
+          this.playerCounts = [availableCount, myTeamCount, oppTeamCount];
+
+          if (this.team === 'white' || this.team === 'dark') {
+            this.showConfirmBtn = true;
+            this.isPickDisabled();
+          }
         })
       );
   }
 
-  parsePlayerList(playerList: string, isMyTeam: boolean): string[] {
-    const playerArray = playerList.split(',');
-    if (this.selectedPlayer && isMyTeam) {
-      (playerArray[0].length) ? playerArray.push(this.selectedPlayer) : playerArray[0] = this.selectedPlayer;
-    }
-    return (playerArray[0].length) ? playerArray : null;
-  }
-
-  parseAvailablePlayers(): string[] {
-    const availablePlayers: string[] = this.availablePlayers;
-    let index: number;
-    if (this.selectedPlayer) {
-      index = this.availablePlayers.findIndex(x => x === this.selectedPlayer);
-      if (index >= 0) {
-        availablePlayers.splice(index, 1);
-      } else {
-        this.availablePlayers.push(this.selectedPlayer);
-      }
-    }
-
-    return availablePlayers;
-  }
-
-  arePlayersAvailable(): boolean {
-    return (!!this.availablePlayers.length && !!this.availablePlayers[0].length) || !!this.selectedPlayer;
-  }
-
-  drop(event: CdkDragDrop<string[]>, isReorderList: boolean): void {
-    if (event.previousContainer !== event.container) {
-      if (isReorderList) {
-        this.selectedPlayer = event.previousContainer.data[event.previousIndex];
-      } else {
-        this.selectedPlayer = null;
-      }
-    }
-  }
-
-  isAvailablePlayerDisabled(myTeam: string, opposingTeam: string): boolean {
+  private isPickDisabled() {
     // Dark team picks first -- dark will always have the same or more players
-    let isDisabled: boolean = false;
+    if (this.team === 'white' && this.playerCounts[TeamType.MY_TEAM] < this.playerCounts[TeamType.OPP_TEAM]) {
+      this.isConfirmDisabled = false;
+    }
+    if (this.team === 'dark' && this.playerCounts[TeamType.MY_TEAM] === this.playerCounts[TeamType.OPP_TEAM]) {
+      this.isConfirmDisabled = false;
+    }
 
-    let myTeamNumPlayers = (myTeam.match(/,/g) || []).length;
-    let oppTeamNumPlayers = (opposingTeam.match(/,/g) || []).length;
-
-    myTeamNumPlayers = (myTeamNumPlayers > 0 || myTeam.length > 0) ? myTeamNumPlayers + 1 : myTeamNumPlayers;
-    oppTeamNumPlayers = (oppTeamNumPlayers > 0  || opposingTeam.length > 0) ? oppTeamNumPlayers + 1 : oppTeamNumPlayers;
-
-    if (this.selectedPlayer) {
-      isDisabled = true;
-    }
-    if (!this.team) {
-      isDisabled = true;
-    }
-    if (this.team === 'white' && myTeamNumPlayers === oppTeamNumPlayers) {
-      isDisabled = true;
-    }
-    if (this.team === 'dark' && myTeamNumPlayers > oppTeamNumPlayers) {
-      isDisabled = true;
-    }
-    return isDisabled;
+    // TODO: Handle goalie picks -- available players == 2
+    // Disable goalies from selection unless they are the only ones left
   }
 
-  isTeamPlayerDisabled(player: string): boolean {
-    let isDisabled: boolean = true;
-    if (this.selectedPlayer && this.selectedPlayer === player) {
-      isDisabled = false;
-    }
-    return isDisabled;
-  }
-
-  noReturnPredicate(): boolean {
-    return false;
-  }
-
-  private processPlayerPick(myTeam: string): void {
-    let playerIndex: number;
-
-    playerIndex = this.availablePlayers.findIndex(x => x === this.selectedPlayer);
-    this.availablePlayers.splice(playerIndex, 1);
-    this.currentTeamData.availablePlayers = this.availablePlayers.join(',');
-
-    if (myTeam.length) {
-      myTeam = myTeam.concat(',');
-    }
-
-    if (this.team === 'white') {
-      this.currentTeamData.whiteTeam = myTeam.concat(this.selectedPlayer);
-    } else if (this.team === 'dark') {
-      this.currentTeamData.darkTeam = myTeam.concat(this.selectedPlayer);
-    }
-  }
-
-  onSubmit(collectionId: string, myTeam: string): void {
-    const currentCaptain: string = (this.team === 'white') ? this.whiteCaptain : this.darkCaptain;;
-    const currentPlayer = this.selectedPlayer;
+  onSubmit(player: string): void {
     // Disable button
     this.isConfirmDisabled = true;
 
-    this.currentTeamData = new TeamPicker();
+    const self = this;
 
-    this.currentTeamData.id = collectionId;
+    let availablePlayerList: string = this.pickerData.availablePlayers;
 
-    this.processPlayerPick(myTeam);
+    if (this.team === 'white') {
+      this.pickerData.whiteTeam = this.pickerData.whiteTeam.concat(`,${player}`);
+    } else if (this.team === 'dark') {
+      this.pickerData.darkTeam = this.pickerData.darkTeam.concat(`,${player}`);
+    }
 
-    // Set selected player to null
-    this.selectedPlayer = null;
+    availablePlayerList = availablePlayerList.replace(`${player}`, '');
+    availablePlayerList = availablePlayerList.replace(',,', ',');
+    if (availablePlayerList.startsWith(',')) {
+      availablePlayerList = availablePlayerList.substr(1);
+    } else if (availablePlayerList.endsWith(',')) {
+      availablePlayerList = availablePlayerList.substr(0, availablePlayerList.length - 1);
+    }
+    this.pickerData.availablePlayers = availablePlayerList;
 
     // Save to firebase
-    this.teamPickerService.saveTeamData(this.currentTeamData).subscribe(() => {
-      this.chat.sendMessage('system', `${currentCaptain} selected ${currentPlayer}`).subscribe(() => {
-        this.isConfirmDisabled = false;
+    this.teamPickerService.saveTeamData(this.pickerData).subscribe(() => {
+      self.chat.sendMessage('system', `${self.teamsData[TeamType.MY_TEAM].captain} selected ${player}`).subscribe(() => {
+        self.isConfirmDisabled = false;
       });
     });
   }
