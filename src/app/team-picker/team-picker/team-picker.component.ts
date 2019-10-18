@@ -118,9 +118,7 @@ export class TeamPickerComponent implements OnInit {
 
     // Save to firebase
     this.teamPickerService.saveTeamData(this.pickerData).subscribe(() => {
-      self.chat.sendMessage('system', `${self.teamsData[TeamType.MY_TEAM].captain} selected ${player}`).subscribe(() => {
-        self.isConfirmDisabled = false;
-      });
+      self.chat.sendMessage('system', `${self.teamsData[TeamType.MY_TEAM].captain} selected ${player}`);
     });
   }
 }
