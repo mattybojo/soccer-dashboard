@@ -74,23 +74,26 @@ export class TeamPickerComponent implements OnInit {
 
           if (this.team === 'white' || this.team === 'dark') {
             this.showConfirmBtn = true;
-            this.isPickDisabled();
+            this.isConfirmDisabled = this.isPickDisabled();
           }
         })
       );
   }
 
-  private isPickDisabled() {
+  private isPickDisabled(): boolean {
     // Dark team picks first -- dark will always have the same or more players
+    let isDisabled: boolean = true;
     if (this.team === 'white' && this.playerCounts[TeamType.MY_TEAM] < this.playerCounts[TeamType.OPP_TEAM]) {
-      this.isConfirmDisabled = false;
+      isDisabled = false;
     }
     if (this.team === 'dark' && this.playerCounts[TeamType.MY_TEAM] === this.playerCounts[TeamType.OPP_TEAM]) {
-      this.isConfirmDisabled = false;
+      isDisabled = false;
     }
 
     // TODO: Handle goalie picks -- available players == 2
     // Disable goalies from selection unless they are the only ones left
+
+    return isDisabled;
   }
 
   onSubmit(player: string): void {
@@ -117,8 +120,10 @@ export class TeamPickerComponent implements OnInit {
     this.pickerData.availablePlayers = availablePlayerList;
 
     // Save to firebase
-    this.teamPickerService.saveTeamData(this.pickerData).subscribe(() => {
-      self.chat.sendMessage('system', `${self.teamsData[TeamType.MY_TEAM].captain} selected ${player}`);
-    });
+    if (!this.isPickDisabled()) {
+      this.teamPickerService.saveTeamData(this.pickerData).subscribe(() => {
+        self.chat.sendMessage('system', `${self.teamsData[TeamType.MY_TEAM].captain} selected ${player}`);
+      });
+    }
   }
 }
