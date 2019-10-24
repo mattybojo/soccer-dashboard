@@ -4,8 +4,8 @@
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button>
     <h1>Estadio Fallon Liga</h1>
-    <button mat-flat-button color="primary" class="login-btn" [routerLink]="'/auth/login'" *ngIf="!authService.isLoggedIn()">Login</button>
-    <button mat-flat-button color="primary" class="logout-btn" (click)="logout()" *ngIf="authService.isLoggedIn()">Logout</button>
+    <button mat-flat-button color="primary" class="login-btn" [routerLink]="'/auth/login'" *ngIf="!getAuthService().isLoggedIn()">Login</button>
+    <button mat-flat-button color="primary" class="logout-btn" (click)="logout()" *ngIf="getAuthService().isLoggedIn()">Logout</button>
   </mat-toolbar-row>
 </mat-toolbar>
 
@@ -16,6 +16,15 @@
         <fa-icon class="menu-icon" [fixedWidth]="true" [icon]="menuItem.icon"></fa-icon>
         <a class="menu-item-link" mat-list-item [routerLink]="menuItem.link" [queryParams]="menuItem.queryParams">{{menuItem.label}}</a>
       </div>
+      <ng-container *ngIf="(getAuthService().isAdmin() | async) as isAdmin">
+        <mat-divider></mat-divider>
+        <p class="admin-menu-header">Admin Menu</p>
+        <mat-divider></mat-divider>
+        <div class="menu-item admin-menu-item" *ngFor="let menuItem of adminMenuItems">
+          <fa-icon class="menu-icon" [fixedWidth]="true" [icon]="menuItem.icon"></fa-icon>
+          <a class="menu-item-link" mat-list-item [routerLink]="menuItem.link" [queryParams]="menuItem.queryParams">{{menuItem.label}}</a>
+        </div>
+      </ng-container>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>

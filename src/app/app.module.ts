@@ -17,6 +17,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { FirebaseUIModule } from 'firebaseui-angular';
 import { firebaseUiConfig } from './auth/login/firebaseui.config';
+import { MatDividerModule } from '@angular/material/divider';
 
 const firebaseUiAuthConfig: firebaseui.auth.Config = firebaseUiConfig;
 
@@ -37,7 +38,8 @@ const firebaseUiAuthConfig: firebaseui.auth.Config = firebaseUiConfig;
     MatIconModule,
     FontAwesomeModule,
     AngularFireAuthModule,
-    FirebaseUIModule.forRoot(firebaseUiAuthConfig)
+    FirebaseUIModule.forRoot(firebaseUiAuthConfig),
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
