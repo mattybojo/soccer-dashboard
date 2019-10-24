@@ -1,9 +1,14 @@
 .mat-nav-list {
   margin-top: 10px;
+  padding-top: 0px;
 }
 
 .mat-list-item {
   display: inline !important;
+}
+
+.mat-list-item:hover, .mat-list-item:focus {
+  background-color: transparent;
 }
 
 .menu-item-link ::ng-deep .mat-list-item-content {
@@ -15,7 +20,9 @@
 }
 
 .menu-item {
-  margin-bottom: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .menu-item:hover {
