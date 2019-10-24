@@ -17,6 +17,9 @@ import { MatCardModule } from '@angular/material/card';
     MatInputModule,
     FormsModule,
     MatCardModule
+  ],
+  exports: [
+    ChatComponent
   ]
 })
 export class TeamPickerModule { }

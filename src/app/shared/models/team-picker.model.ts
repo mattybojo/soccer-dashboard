@@ -14,5 +14,8 @@ export class TeamData {
 export enum TeamType {
   AVAILABLE = 0,
   MY_TEAM = 1,
-  OPP_TEAM = 2
+  OPP_TEAM = 2,
+  DARK_TEAM = 1,
+  WHITE_TEAM = 2,
+  REMAINING = 3
 }

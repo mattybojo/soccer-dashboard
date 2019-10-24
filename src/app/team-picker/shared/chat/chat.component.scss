@@ -66,6 +66,14 @@
   color: #000000;
 }
 
+.admin-chat-bubble {
+  border: 1px solid #ffffff;
+  background-color: #000000;
+  color: #ffffff;
+  float: left;
+  width: calc(100% - 20px);
+}
+
 .chat-message {
   margin: 5px;
 }

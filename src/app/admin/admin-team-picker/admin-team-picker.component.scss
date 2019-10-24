@@ -1,0 +1,55 @@
+.team-picker-container {
+  text-align: center;
+}
+
+.player-container {
+  width: 200px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.player-card {
+  max-width: 400px;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  width: 180px;
+  overflow: hidden;
+}
+
+.smaller-card {
+  line-height: 16px !important;
+}
+
+.player-name {
+  float: left;
+  vertical-align: middle;
+  line-height: 34px;
+}
+
+.player-select-btn {
+  height: 34px;
+  float: right;
+}
+
+.icon-container {
+  float: right;
+}
+
+.icon-container > fa-icon:not(:last-of-type) {
+  margin-right: 10px;
+}
+
+.menu-icon {
+  cursor: pointer;
+}
+
+.white-team-icon {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+.dark-team-icon {
+  border: 1px solid #000000;
+}
