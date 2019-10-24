@@ -1,4 +1,4 @@
-export class Player {
+export class PlayerStats {
   id: string;
   name: string;
   wins: number;
@@ -8,4 +8,9 @@ export class Player {
   gamesPlayed: number;
   cleanSheets: number;
   winPct?: number;
+}
+
+export class Player {
+  id: string;
+  name: string;
 }
