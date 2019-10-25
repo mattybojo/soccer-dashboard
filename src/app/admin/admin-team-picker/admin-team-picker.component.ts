@@ -21,7 +21,7 @@ export class AdminTeamPickerComponent implements OnInit {
   pickerData: TeamPicker;
   teamsData: [TeamData, TeamData, TeamData, TeamData] = [new TeamData(), new TeamData(), new TeamData(), new TeamData()];
   team: string;
-  playerCounts: [number, number, number, number];
+  playerCounts: [number, number, number, number] = [0, 0, 0, 0];
   faUserCheck = faUserCheck;
   faUserMinus = faUserMinus;
   faUser = faUser;
@@ -53,6 +53,7 @@ export class AdminTeamPickerComponent implements OnInit {
     combineLatest(obsArray).subscribe(obs => {
       self.pickerData = obs[0][0];
       remainingPlayers = cloneDeep(obs[1]);
+      let teamCaptain: string;
 
       playerList = self.pickerData.availablePlayers.split(',');
       playerList = (playerList && playerList.length > 0 && playerList[0].length > 0) ? playerList.sort() : null;
@@ -64,17 +65,23 @@ export class AdminTeamPickerComponent implements OnInit {
 
       playersInPool.forEach((playerName: string) => {
         playerIndex = remainingPlayers.findIndex(player => player.name === playerName);
-        remainingPlayers.splice(playerIndex, 1);
+        if (playerIndex > -1) {
+          remainingPlayers.splice(playerIndex, 1);
+        }
       });
 
       self.teamsData[TeamType.REMAINING] = { players: remainingPlayers.map(x => x.name).sort(), captain: null, label: 'Out'};
 
       playerList = self.pickerData.darkTeam.split(',');
-      self.teamsData[TeamType.MY_TEAM] = { players: playerList, captain: playerList[0], label: 'Dark Team'};
-      myTeamCount = playerList.length;
+      playerList = (playerList && playerList.length > 0 && playerList[0].length > 0) ? playerList : null;
+      teamCaptain = (playerList && playerList[0]) ? playerList[0] : null;
+      self.teamsData[TeamType.DARK_TEAM] = { players: playerList, captain: teamCaptain, label: 'Dark Team'};
+      myTeamCount = (playerList) ? playerList.length : 0;
       playerList = self.pickerData.whiteTeam.split(',');
-      self.teamsData[TeamType.OPP_TEAM] = { players: playerList, captain: playerList[0], label: 'White Team'};
-      oppTeamCount = playerList.length;
+      playerList = (playerList && playerList.length > 0 && playerList[0].length > 0) ? playerList : null;
+      teamCaptain = (playerList && playerList[0]) ? playerList[0] : null;
+      self.teamsData[TeamType.WHITE_TEAM] = { players: playerList, captain: teamCaptain, label: 'White Team'};
+      oppTeamCount = (playerList) ? playerList.length : 0;
 
       self.playerCounts = [availableCount, myTeamCount, oppTeamCount, remainingPlayers.length];
     });
@@ -133,21 +140,6 @@ export class AdminTeamPickerComponent implements OnInit {
         this.pickerData.whiteTeam = this.addPlayerToTeam(this.pickerData.whiteTeam, player);
         break;
     }
-
-    // TODO: Testing local changes
-    /*
-    if (fromTeam === TeamType.REMAINING) {
-      this.teamsData[3].players = this.removePlayerFromTeam(this.teamsData[3].players.join(','), player).split(',');
-    }
-    if (toTeam === TeamType.REMAINING) {
-      this.teamsData[3].players = this.addPlayerToTeam(this.teamsData[3].players.join(','), player).split(',');
-    }
-    this.teamsData[3].players = this.teamsData[3].players && this.teamsData[3].players[0] && this.teamsData[3].players[0].length ? this.teamsData[3].players : null;
-
-    this.teamsData[0].players = this.pickerData.availablePlayers ? this.pickerData.availablePlayers.split(',') : null;
-    this.teamsData[1].players = this.pickerData.darkTeam ? this.pickerData.darkTeam.split(',') : null;
-    this.teamsData[2].players = this.pickerData.whiteTeam ? this.pickerData.whiteTeam.split(',') : null;
-    */
 
     // Save to firebase
     this.teamPickerService.saveTeamData(this.pickerData);
