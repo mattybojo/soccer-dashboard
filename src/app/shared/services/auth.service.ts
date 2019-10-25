@@ -28,8 +28,8 @@ export class AuthService {
     });
   }
 
-  getUser(): BehaviorSubject<UserData> {
-    return this.user$;
+  getUser(): UserData {
+    return this.user$.value;
   }
 
   isAdmin(): Observable<boolean> {
