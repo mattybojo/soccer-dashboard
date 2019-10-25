@@ -26,7 +26,7 @@ async function uploadPlayers() {
 
   const playerList: string[] = ['Akachi', 'Anson', 'Ashan', 'Christian', 'Cosmin', 'Daniel', 'Eric', 'Fernando', 'Goce',
     'Igor', 'Jason', 'Jeff', 'JM', 'Joe', 'Johan', 'John', 'Kenneth', 'Matt Bojo', 'Matt Brunson', 'Matt Weaver',
-    'Mike', 'Nawid', 'Sab', 'Shane', 'Sundev', 'Uffe', 'Vishnu', 'Vlad', 'Walt', 'Zoran'];
+    'Mike', 'Nawid', 'Pedro', 'Sab', 'Shane', 'Sundev', 'Uffe', 'Vishnu', 'Vlad', 'Walt', 'Zoran'];
 
   playerList.forEach((player: string) => {
     players.add({ name: player });
