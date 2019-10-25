@@ -1,11 +1,11 @@
-import { firebaseConfig } from '../app/config/firebase.config';
+import { config } from '../app/config/config';
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: false,
-  firebase: firebaseConfig
+  firebase: config.firebaseConfig
 };
 
 /*

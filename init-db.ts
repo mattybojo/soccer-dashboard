@@ -1,15 +1,15 @@
-import { firebaseConfig } from './src/app/config/firebase.config';
+import { config } from './src/app/config/config';
 import * as firebase from 'firebase';
 
-const config = firebaseConfig;
+const firebaseConfig = config.firebaseConfig;
 
 console.log('Uploading data to the database with the following config:\n');
 
-console.log(JSON.stringify(config));
+console.log(JSON.stringify(firebaseConfig));
 
 console.log('\n\n\n\nMake sure that this is your own database, so that you have write access to it.\n\n\n');
 
-firebase.initializeApp(config);
+firebase.initializeApp(firebaseConfig);
 
 const db = firebase.firestore();
 
