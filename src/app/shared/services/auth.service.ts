@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { from, Observable, of, BehaviorSubject } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { convertSnap } from './db-utils';
 
 @Injectable({
@@ -11,33 +11,35 @@ import { convertSnap } from './db-utils';
 })
 export class AuthService {
 
-  private user$: BehaviorSubject<UserData> = new BehaviorSubject(null);
+  private userData$: BehaviorSubject<UserData> = new BehaviorSubject(null);
+  private user$: BehaviorSubject<firebase.User> = new BehaviorSubject(null);
 
   constructor(private afAuth: AngularFireAuth, private db: AngularFirestore) {
     const self = this;
     this.afAuth.authState.pipe(
-      switchMap(auth => {
-        if (auth) {
-          return self.getUserData(auth.uid);
+      switchMap((user: firebase.User) => {
+        if (user) {
+          self.user$.next(user);
+          return self.getUserData(user.uid);
         } else {
           return of(null);
         }
       })
-    ).subscribe((user: UserData) => {
-      self.user$.next(user);
+    ).subscribe((userData: UserData) => {
+      self.userData$.next(userData);
     });
   }
 
   getUser(): UserData {
-    return this.user$.value;
+    return this.userData$.value;
   }
 
   isAdmin(): Observable<boolean> {
-    return this.user$.pipe(map(userData => (userData) ? userData.isAdmin : false));
+    return this.userData$.pipe(map(userData => (userData) ? userData.isAdmin : false));
   }
 
   isLoggedIn(): boolean {
-    return this.user$.value != null;
+    return this.userData$.value != null;
   }
 
   logout(): void {
@@ -45,38 +47,44 @@ export class AuthService {
   }
 
   saveUserData(user: firebase.User, isNewUser: boolean): Observable<DocumentReference> {
-    const self = this;
     let userData: UserData = new UserData();
     if (user) {
       userData = this.setUserData(userData, user);
       if (isNewUser) {
         return from(this.db.collection('userData').add({ ...userData }));
       } else {
-        this.getUserData(user.uid).subscribe((dbUserData: UserData) => {
-          const newData: UserData = self.setUserData(dbUserData, user);
-          self.user$.next(newData);
-          self.db.doc(`userData/${newData.id}`).update(newData);
-        });
+        this.getUserData(user.uid);
       }
     }
   }
 
-  private getUserData(uid: string): Observable<UserData> {
+  getUserData(uid: string): Observable<UserData> {
+    const self = this;
     return this.db.collection('userData', ref => ref.where('uid', '==', uid))
       .snapshotChanges()
       .pipe(
-        map(snap => convertSnap<UserData>(snap))
+        map(snap => convertSnap<UserData>(snap)),
+        tap((userData: UserData) => {
+          const user: firebase.User = self.user$.value;
+          const newData: UserData = self.setUserData(userData, user);
+          self.userData$.next(newData);
+          if (user) {
+            self.db.doc(`userData/${newData.id}`).update(newData);
+          }
+        })
       );
   }
 
   private setUserData(userData: UserData, user: firebase.User) {
-    userData.email = userData.email || user.email;
-    userData.emailVerified = userData.emailVerified || user.emailVerified;
-    userData.name = userData.name || user.displayName;
-    userData.photoUrl = userData.photoUrl || user.photoURL;
-    userData.uid = userData.uid || user.uid;
-    userData.phoneNumber = userData.phoneNumber || user.phoneNumber;
-    userData.isAdmin = userData.isAdmin || false;
+    if (user) {
+      userData.email = userData.email || user.email;
+      userData.emailVerified = userData.emailVerified || user.emailVerified;
+      userData.name = userData.name || user.displayName;
+      userData.photoUrl = userData.photoUrl || user.photoURL;
+      userData.uid = userData.uid || user.uid;
+      userData.phoneNumber = userData.phoneNumber || user.phoneNumber;
+      userData.isAdmin = userData.isAdmin || false;
+    }
 
     return userData;
   }
