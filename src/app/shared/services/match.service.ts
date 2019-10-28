@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
 import { Match } from '../models/match.model';
-import { Observable } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { convertSnaps } from './db-utils';
 import { map } from 'rxjs/operators';
 
@@ -19,5 +19,9 @@ export class MatchService {
       .pipe(
         map(snaps => convertSnaps<Match>(snaps))
       );
+  }
+
+  saveMatch(match: Match): Observable<DocumentReference> {
+    return from(this.db.collection('matches').add({ ...match }));
   }
 }

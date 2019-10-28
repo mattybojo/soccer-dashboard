@@ -2,6 +2,22 @@
   text-align: center;
 }
 
+.admin-btn-container {
+  margin-top: 5px;
+}
+
+.admin-btn-container > button {
+  margin-right: 5px;
+}
+
+.reset-btn {
+  background-color: #ffba01;
+}
+
+.btn-text {
+  margin-left: 5px;
+}
+
 .player-container {
   width: 200px;
   max-width: 100%;

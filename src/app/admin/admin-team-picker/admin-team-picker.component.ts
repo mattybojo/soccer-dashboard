@@ -5,8 +5,10 @@ import { Observable, combineLatest } from 'rxjs';
 import { ChatComponent } from './../../team-picker/shared/chat/chat.component';
 import { Player } from './../../shared/models/player.model';
 import { TeamPickerService } from './../../shared/services/team-picker.service';
-import { faUserCheck, faUserMinus, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faUserCheck, faUserMinus, faUser, faExclamationTriangle, faSave } from '@fortawesome/free-solid-svg-icons';
 import { cloneDeep } from 'lodash';
+import { SaveMatchDialogComponent } from '../save-match-dialog/save-match-dialog.component';
+import { MatDialogRef, MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-admin-team-picker',
@@ -25,8 +27,13 @@ export class AdminTeamPickerComponent implements OnInit {
   faUserCheck = faUserCheck;
   faUserMinus = faUserMinus;
   faUser = faUser;
+  faExclamationTriangle = faExclamationTriangle;
+  faSave = faSave;
 
-  constructor(private teamPickerService: TeamPickerService, private playerService: PlayerService) {}
+  saveMatchDialogRef: MatDialogRef<SaveMatchDialogComponent>;
+
+  constructor(private teamPickerService: TeamPickerService, private playerService: PlayerService,
+              private dialog: MatDialog) {}
 
   ngOnInit() {
     this.processTeamPickerResponse();
@@ -36,8 +43,8 @@ export class AdminTeamPickerComponent implements OnInit {
     const self = this;
     let playerList: string[];
     let availableCount: number;
-    let myTeamCount: number;
-    let oppTeamCount: number;
+    let darkTeamCount: number;
+    let whiteTeamCount: number;
     let playerIndex: number;
     let playersInPool: string[];
     let remainingPlayers: Player[];
@@ -76,14 +83,15 @@ export class AdminTeamPickerComponent implements OnInit {
       playerList = (playerList && playerList.length > 0 && playerList[0].length > 0) ? playerList : null;
       teamCaptain = (playerList && playerList[0]) ? playerList[0] : null;
       self.teamsData[TeamType.DARK_TEAM] = { players: playerList, captain: teamCaptain, label: 'Dark Team'};
-      myTeamCount = (playerList) ? playerList.length : 0;
+      darkTeamCount = (playerList) ? playerList.length : 0;
+
       playerList = self.pickerData.whiteTeam.split(',');
       playerList = (playerList && playerList.length > 0 && playerList[0].length > 0) ? playerList : null;
       teamCaptain = (playerList && playerList[0]) ? playerList[0] : null;
       self.teamsData[TeamType.WHITE_TEAM] = { players: playerList, captain: teamCaptain, label: 'White Team'};
-      oppTeamCount = (playerList) ? playerList.length : 0;
+      whiteTeamCount = (playerList) ? playerList.length : 0;
 
-      self.playerCounts = [availableCount, myTeamCount, oppTeamCount, remainingPlayers.length];
+      self.playerCounts = [availableCount, darkTeamCount, whiteTeamCount, remainingPlayers.length];
     });
   }
 
@@ -111,6 +119,23 @@ export class AdminTeamPickerComponent implements OnInit {
     }
 
     return newTeam;
+  }
+
+  onResetTeamPicker() {
+    this.pickerData.availablePlayers = '';
+    this.pickerData.darkTeam = '';
+    this.pickerData.whiteTeam = '';
+
+    this.teamPickerService.saveTeamData(this.pickerData);
+  }
+
+  onSaveMatch() {
+    this.saveMatchDialogRef = this.dialog.open(SaveMatchDialogComponent, {
+      data: {
+        whiteTeam: this.pickerData.whiteTeam,
+        darkTeam: this.pickerData.darkTeam
+      }
+    });
   }
 
   onClick(player: string, fromTeam: TeamType, toTeam: TeamType): void {
