@@ -7,29 +7,20 @@ table {
 }
 
 .white-team, .white-team-penalties {
-  border-right: 1px solid rgba(0,0,0,0.12);
-}
-
-.white-team td, .white-team-penalties td {
-  text-align: right;
-}
-
-.dark-team td, .dark-team-penalties td {
-  text-align: left;
+  border-left: 1px solid rgba(0,0,0,0.12);
 }
 
 .white-team ::ng-deep .mat-column-white-name, .mat-column-white-goals {
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.dark-team ::ng-deep .mat-column-dark-name, .mat-column-dark-goals {
   text-align: left;
   justify-content: flex-start;
 }
 
-.white-team ::ng-deep .mat-column-header-white-team-score {
+.dark-team ::ng-deep .mat-column-dark-name, .mat-column-dark-goals {
   text-align: right;
+  justify-content: flex-end;
+}
+
+.white-team ::ng-deep .mat-column-header-white-team-score {
   font-weight: bold;
   font-size: 16px;
 }
@@ -60,17 +51,16 @@ table {
 }
 
 .white-team-penalties ::ng-deep .mat-column-white-name-penalty, .mat-column-white-scored-penalty {
-  text-align: right;
-  justify-content: flex-end;
-}
-
-.dark-team-penalties ::ng-deep .mat-column-dark-name-penalty, .mat-column-dark-scored-penalty {
   text-align: left;
   justify-content: flex-start;
 }
 
-.white-team-penalties ::ng-deep .mat-column-header-white-team-penalty {
+.dark-team-penalties ::ng-deep .mat-column-dark-name-penalty, .mat-column-dark-scored-penalty {
   text-align: right;
+  justify-content: flex-end;
+}
+
+.white-team-penalties ::ng-deep .mat-column-header-white-team-penalty {
   font-weight: bold;
   font-size: 16px;
 }
@@ -109,6 +99,22 @@ table {
   width: 100px;
 }
 
-.white-team-penalties th {
-  text-align: right;
+th.mat-header-cell {
+  border: 1px solid rgba(0,0,0,.12);
+  text-align: center;
+}
+
+td.mat-cell {
+  border: 1px solid rgba(0,0,0,.12);
+  text-align: center;
+}
+
+th.mat-header-cell, td.mat-cell {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+:host ::ng-deep .mat-sort-header-container {
+  display: flex;
+  justify-content: center;
 }

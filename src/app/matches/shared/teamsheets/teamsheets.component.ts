@@ -33,11 +33,11 @@ export class TeamsheetsComponent implements OnInit {
   whiteTeamPenaltyData: PenaltyTaker[] = [];
   darkTeamPenaltyData: PenaltyTaker[] = [];
 
-  whiteTeamColumns: string[] = ['name', 'goals'];
-  darkTeamColumns: string[] = ['goals', 'name'];
+  darkTeamColumns: string[] = ['name', 'goals'];
+  whiteTeamColumns: string[] = ['goals', 'name'];
 
-  whiteTeamPenaltyColumns: string[] = ['name', 'scored'];
-  darkTeamPenaltyColumns: string[] = ['scored', 'name'];
+  darkTeamPenaltyColumns: string[] = ['name', 'scored'];
+  whiteTeamPenaltyColumns: string[] = ['scored', 'name'];
 
   whiteTeamGoals: number = 0;
   darkTeamGoals: number = 0;
