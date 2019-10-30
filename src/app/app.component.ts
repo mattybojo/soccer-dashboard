@@ -27,6 +27,7 @@ export class AppComponent implements OnInit {
     this.authService.isAdmin().subscribe((isAdmin: boolean) => {
       if (isAdmin) {
         this.adminMenuItems = [];
+        this.adminMenuItems.push({ label: 'Matches', link: '/admin/matches', icon: faFutbol});
         this.adminMenuItems.push({ label: 'Team Picker', link: '/admin/team-picker', icon: faUsers});
       }
     });

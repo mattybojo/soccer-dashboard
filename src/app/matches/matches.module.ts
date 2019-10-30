@@ -19,6 +19,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatSortModule,
     MatSelectModule,
     FontAwesomeModule
+  ],
+  exports: [
+    TeamsheetsComponent
   ]
 })
 export class MatchesModule { }

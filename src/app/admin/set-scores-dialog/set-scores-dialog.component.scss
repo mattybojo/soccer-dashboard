@@ -1,0 +1,40 @@
+h1.dialog-title {
+  text-align: center;
+}
+
+div.score-header-container {
+  margin-bottom: 5px;
+}
+
+div.score-header {
+  width: 250px;
+  display: inline-block;
+  text-align: center;
+  font-weight: bold;
+}
+
+th, td {
+  border: 1px solid rgba(0,0,0);
+}
+
+table.player-data-table {
+  display: inline-table;
+  border-collapse: collapse;
+}
+
+input.input-goals {
+  width: 97px;
+}
+
+td.player-name {
+  text-align: center;
+  width: 147px;
+}
+
+mat-dialog-actions {
+  justify-content: center;
+}
+
+.cancel-btn {
+  background-color: #b4bbe4;
+}

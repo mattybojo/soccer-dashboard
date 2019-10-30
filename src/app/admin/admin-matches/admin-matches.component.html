@@ -1,0 +1,18 @@
+<div class="select-container">
+  <div class="admin-btn-container">
+    <button mat-raised-button color="primary" (click)="setScores()">
+      <fa-icon [fixedWidth]="true" [icon]="faSave"></fa-icon>
+      <span class="btn-text">Update Scores</span>
+    </button>
+  </div>
+  <mat-form-field>
+    <mat-label>Matches</mat-label>
+    <mat-select [(value)]="selectedMatch" (selectionChange)="onSelectionChange($event)">
+      <mat-option *ngFor="let dateOption of dateOptions" [value]="dateOption">
+        {{dateOption}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+</div>
+
+<efl-teamsheets [matchData]="match"></efl-teamsheets>

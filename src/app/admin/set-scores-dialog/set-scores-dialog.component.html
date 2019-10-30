@@ -1,0 +1,37 @@
+<form #setScoresDialog="ngForm" name="setScoresDialog" (ngSubmit)="onSubmit()">
+  <h1 mat-dialog-title class="dialog-title">Update Match Scores</h1>
+  <mat-dialog-content>
+    <div class="score-header-container">
+      <div class="score-header">
+        <span class="team-score">Dark Team: {{darkTeamScore}}</span>
+      </div>
+      <div class="score-header">
+        <span class="team-score">{{whiteTeamScore}}: White Team</span>
+      </div>
+    </div>
+    <table class="player-data-table">
+      <tr>
+        <th>Name</th>
+        <th>Goals</th>
+      </tr>
+      <tr *ngFor="let player of darkTeamData; let i = index">
+        <td class="player-name">{{player.name}}</td>
+        <td><input matInput [(ngModel)]="player.goals" #darkGoal="ngModel" [name]="'dark'+i" type="number" class="input-goals" (change)="calculateDarkTeamScore()" required></td>
+      </tr>
+    </table>
+    <table class="player-data-table">
+      <tr>
+        <th>Goals</th>
+        <th>Name</th>
+      </tr>
+      <tr *ngFor="let player of whiteTeamData; let i = index">
+        <td><input matInput [(ngModel)]="player.goals" #whiteGoal="ngModel" [name]="'white'+i" type="number" class="input-goals" (change)="calculateWhiteTeamScore()" required></td>
+        <td class="player-name">{{player.name}}</td>
+      </tr>
+    </table>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-flat-button color="primary" type="submit" [disabled]="!setScoresDialog.valid || isSaving">Save</button>
+    <button mat-flat-button type="button" mat-dialog-close class="cancel-btn">Cancel</button>
+  </mat-dialog-actions>
+</form>
