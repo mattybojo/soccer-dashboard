@@ -1,5 +1,5 @@
 export class PlayerStats {
-  id: string;
+  id?: string;
   name: string;
   wins: number;
   captainWins: number;
@@ -11,6 +11,6 @@ export class PlayerStats {
 }
 
 export class Player {
-  id: string;
+  id?: string;
   name: string;
 }

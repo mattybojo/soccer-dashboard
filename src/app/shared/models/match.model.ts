@@ -1,4 +1,5 @@
 export class Match {
+  id?: string;
   date: string;
   whiteTeam: Team;
   darkTeam: Team;
@@ -22,4 +23,9 @@ export class MatchPlayer {
 export class PenaltyTaker {
   name: string;
   scored: boolean;
+}
+
+export class AdminPlayerData {
+  name: string;
+  goals: number;
 }

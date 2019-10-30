@@ -1,5 +1,5 @@
 export class TeamPicker {
-  id: string;
+  id?: string;
   availablePlayers: string;
   whiteTeam: string;
   darkTeam: string;

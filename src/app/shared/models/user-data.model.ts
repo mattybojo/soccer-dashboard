@@ -1,5 +1,5 @@
 export class UserData {
-  id: string;
+  id?: string;
   name: string;
   email: string;
   photoUrl: string;
