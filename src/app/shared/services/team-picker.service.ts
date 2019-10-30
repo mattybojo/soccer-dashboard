@@ -21,7 +21,11 @@ export class TeamPickerService {
       );
   }
 
-  saveTeamData(teamData: TeamPicker): Observable<void> {
-    return from(this.db.doc(`teamPicker/${teamData.id}`).update(Object.assign({}, teamData)));
+  saveTeamData(teamData: TeamPicker): Observable<any> {
+    if (teamData.id) {
+      return from(this.db.doc(`teamPicker/${teamData.id}`).update(Object.assign({}, teamData)));
+    } else {
+      return from(this.db.collection('matches').add(Object.assign({}, teamData)));
+    }
   }
 }
