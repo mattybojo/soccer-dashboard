@@ -1,11 +1,11 @@
 <form #saveMatchDialog="ngForm" name="saveMatchDialog">
   <h1 mat-dialog-title>Save Lineups</h1>
   <mat-dialog-content>
-    Enter the match date (MM-DD-YYYY):
+    <span>Enter the match date (MM-DD-YYYY):&nbsp;</span>
     <input matInput [(ngModel)]="match.date" ngModel name="date" required pattern="\d{2}-\d{2}-\d{4}">
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-button [disabled]="!saveMatchDialog.valid || isSaving" (click)="saveMatch()">Save</button>
-    <button mat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button color="primary" [disabled]="!saveMatchDialog.valid || isSaving" (click)="saveMatch()">Save</button>
+    <button mat-flat-button mat-dialog-close class="cancel-btn">Cancel</button>
   </mat-dialog-actions>
 </form>
