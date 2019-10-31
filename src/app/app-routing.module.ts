@@ -21,6 +21,9 @@ const routes: Routes = [{
 }, {
   path: 'admin',
   loadChildren: './admin/admin.module#AdminModule'
+}, {
+  path: 'changelog',
+  loadChildren: './changelog/changelog.module#ChangelogModule'
 }];
 
 @NgModule({

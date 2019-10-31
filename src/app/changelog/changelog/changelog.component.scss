@@ -1,0 +1,29 @@
+.changelog-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+mat-accordion {
+  width: 90%;
+  margin-bottom: 5px;
+}
+
+mat-expansion-panel ::ng-deep .mat-expansion-panel-content {
+  background-color: #e6e6e6;
+}
+
+mat-expansion-panel-header {
+  background-color: #d9d9d9 !important;
+}
+
+li {
+  list-style-type: square;
+}
+
+mat-expansion-panel ::ng-deep .mat-expansion-panel-body {
+  padding-left: 0;
+  padding-top: 16px;
+}
+
+
