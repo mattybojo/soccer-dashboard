@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { AuthService } from './shared/services/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from './shared/models/menu.model';
-import { faTable, faFutbol, faUsers, faClipboardList } from '@fortawesome/free-solid-svg-icons';
+import { faTable, faFutbol, faUsers, faClipboardList, faStar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   faFutbol = faFutbol;
   faUsers = faUsers;
   faClipboardList = faClipboardList;
+  faStar = faStar;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -31,6 +32,7 @@ export class AppComponent implements OnInit {
         this.adminMenuItems = [];
         this.adminMenuItems.push({ label: 'Matches', link: '/admin/matches', icon: faFutbol });
         this.adminMenuItems.push({ label: 'Team Picker', link: '/admin/team-picker', icon: faUsers });
+        this.adminMenuItems.push({ label: 'MOTM', link: '/admin/motm', icon: faStar });
       }
     });
   }

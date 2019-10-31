@@ -1,3 +1,4 @@
+import { AdminMotmVotingComponent } from './admin-motm-voting/admin-motm-voting.component';
 import { AdminGuard } from './../shared/guards/admin.guard';
 import { AdminTeamPickerComponent } from './admin-team-picker/admin-team-picker.component';
 import { Routes, RouterModule } from '@angular/router';
@@ -11,6 +12,10 @@ const routes: Routes = [{
 }, {
   path: 'matches',
   component: AdminMatchesComponent,
+  canActivate: [AdminGuard]
+}, {
+  path: 'motm',
+  component: AdminMotmVotingComponent,
   canActivate: [AdminGuard]
 }];
 

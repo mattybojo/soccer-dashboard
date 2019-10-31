@@ -1,0 +1,37 @@
+.team-picker-container {
+  text-align: center;
+}
+
+.player-container {
+  width: 200px;
+  max-width: 100%;
+  margin: 0 25px 25px 0;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.player-card {
+  max-width: 400px;
+  border: 1px solid #cccccc;
+  padding: 10px;
+  width: 180px;
+  overflow: hidden;
+}
+
+.player-name {
+  float: left;
+  vertical-align: middle;
+  line-height: 34px;
+}
+
+.smaller-card {
+  line-height: 16px !important;
+}
+
+.selected {
+  background-color: #80b3ff;
+}
+
+::ng-deep .snackbar-formatting {
+  background-color: #060;
+}

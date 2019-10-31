@@ -1,0 +1,26 @@
+<div class="team-picker-container">
+  <!-- Dark team -->
+  <div class="player-container" *ngIf="darkTeamPlayers">
+    <h2 class="droplist-label">Dark Team</h2>
+
+    <mat-card class="player-card" [class.selected]="player===selectedPlayer" *ngFor="let player of darkTeamPlayers" (click)="selectPlayer(player)">
+      <mat-card-content class="player-card-content">
+        <span class="player-name smaller-card">{{ player }}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+
+  <!-- White team -->
+  <div class="player-container" *ngIf="whiteTeamPlayers">
+    <h2 class="droplist-label">White Team</h2>
+
+    <mat-card class="player-card" [class.selected]="player===selectedPlayer" *ngFor="let player of whiteTeamPlayers" (click)="selectPlayer(player)">
+      <mat-card-content class="player-card-content">
+        <span class="player-name smaller-card">{{ player }}</span>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="btn-container">
+    <button mat-flat-button color="primary" (click)="submitVote()" [disabled]="!selectedPlayer || isSaving">Submit Vote</button>
+  </div>
+</div>

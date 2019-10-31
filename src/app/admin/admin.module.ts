@@ -16,9 +16,11 @@ import { SetScoresDialogComponent } from './set-scores-dialog/set-scores-dialog.
 import { MatDialogModule } from '@angular/material';
 import { SaveMatchDialogComponent } from './save-match-dialog/save-match-dialog.component';
 import { MatTableModule } from '@angular/material/table';
+import { AdminMotmVotingComponent } from './admin-motm-voting/admin-motm-voting.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
-  declarations: [AdminTeamPickerComponent, SaveMatchDialogComponent, SetScoresDialogComponent, AdminMatchesComponent],
+  declarations: [AdminTeamPickerComponent, SaveMatchDialogComponent, SetScoresDialogComponent, AdminMatchesComponent, AdminMotmVotingComponent],
   imports: [
     AdminRoutingModule,
     CommonModule,
@@ -33,7 +35,8 @@ import { MatTableModule } from '@angular/material/table';
     MatchesModule,
     MatDialogModule,
     FormsModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule
   ],
   entryComponents: [SaveMatchDialogComponent, SetScoresDialogComponent]
 })

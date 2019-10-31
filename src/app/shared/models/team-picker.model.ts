@@ -19,3 +19,8 @@ export enum TeamType {
   WHITE_TEAM = 2,
   REMAINING = 3
 }
+
+export class MotmVote {
+  id?: string;
+  votes: string;
+}
