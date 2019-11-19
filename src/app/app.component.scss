@@ -1,3 +1,11 @@
+@import '~include-media/dist/_include-media';
+
+mat-sidenav {
+  @include media(">=phone", "<tablet") {
+    width: 175px;
+  }
+}
+
 .mat-nav-list {
   margin-top: 10px;
   padding-top: 0px;
