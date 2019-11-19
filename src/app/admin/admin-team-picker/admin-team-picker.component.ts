@@ -5,7 +5,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { ChatComponent } from './../../team-picker/shared/chat/chat.component';
 import { Player } from './../../shared/models/player.model';
 import { TeamPickerService } from './../../shared/services/team-picker.service';
-import { faUserCheck, faUserMinus, faUser, faExclamationTriangle, faSave } from '@fortawesome/free-solid-svg-icons';
+import { faUserCheck, faUserMinus, faUser, faExclamationTriangle, faSave, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { cloneDeep } from 'lodash';
 import { SaveMatchDialogComponent } from '../save-match-dialog/save-match-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
@@ -29,6 +29,9 @@ export class AdminTeamPickerComponent implements OnInit {
   faUser = faUser;
   faExclamationTriangle = faExclamationTriangle;
   faSave = faSave;
+  faPlus = faPlus;
+
+  disableCaptainPicker: boolean = true;
 
   saveMatchDialogRef: MatDialogRef<SaveMatchDialogComponent>;
 
@@ -36,10 +39,6 @@ export class AdminTeamPickerComponent implements OnInit {
               private dialog: MatDialog) {}
 
   ngOnInit() {
-    this.processTeamPickerResponse();
-  }
-
-  processTeamPickerResponse(): void {
     const self = this;
     let playerList: string[];
     let availableCount: number;
@@ -92,6 +91,12 @@ export class AdminTeamPickerComponent implements OnInit {
       whiteTeamCount = (playerList) ? playerList.length : 0;
 
       self.playerCounts = [availableCount, darkTeamCount, whiteTeamCount, remainingPlayers.length];
+
+      if (availableCount >= 2 && (darkTeamCount === 0 && whiteTeamCount === 0)) {
+        self.disableCaptainPicker = false;
+      } else {
+        self.disableCaptainPicker = true;
+      }
     });
   }
 
@@ -119,6 +124,24 @@ export class AdminTeamPickerComponent implements OnInit {
     }
 
     return newTeam;
+  }
+
+  onPickCaptains() {
+    const index1: number = Math.round(Math.random() * (this.playerCounts[0] - 1));
+    let index2: number = Math.round(Math.random() * (this.playerCounts[0] - 1));
+    while (index1 === index2) {
+      index2 = Math.round(Math.random() * (this.playerCounts[0] - 1));
+    }
+    const player1: string = this.teamsData[0].players[index1];
+    const player2: string = this.teamsData[0].players[index2];
+
+    this.pickerData.availablePlayers = this.removePlayerFromTeam(this.pickerData.availablePlayers, player1);
+    this.pickerData.availablePlayers = this.removePlayerFromTeam(this.pickerData.availablePlayers, player2);
+
+    this.pickerData.darkTeam = this.addPlayerToTeam(this.pickerData.darkTeam, player1);
+    this.pickerData.whiteTeam = this.addPlayerToTeam(this.pickerData.whiteTeam, player2);
+
+    this.teamPickerService.saveTeamData(this.pickerData);
   }
 
   onResetTeamPicker() {

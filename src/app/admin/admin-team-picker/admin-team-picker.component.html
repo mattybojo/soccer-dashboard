@@ -9,6 +9,10 @@
       <fa-icon [fixedWidth]="true" [icon]="faExclamationTriangle"></fa-icon>
       <span class="btn-text">Reset Team Picker</span>
     </button>
+    <button mat-raised-button color="primary" (click)="onPickCaptains()" [disabled]="disableCaptainPicker">
+      <fa-icon [fixedWidth]="true" [icon]="faPlus"></fa-icon>
+      <span class="btn-text">Select captains</span>
+    </button>
   </div>
 
   <!-- Available players -->
