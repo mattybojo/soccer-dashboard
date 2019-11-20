@@ -10,8 +10,12 @@
       <span class="btn-text">Reset Team Picker</span>
     </button>
     <button mat-raised-button color="primary" (click)="onPickCaptains()" [disabled]="disableCaptainPicker">
+      <fa-icon [fixedWidth]="true" [icon]="faUserFriends"></fa-icon>
+      <span class="btn-text">Select Captains</span>
+    </button>
+    <button mat-raised-button color="primary" (click)="onAddPlayer()">
       <fa-icon [fixedWidth]="true" [icon]="faPlus"></fa-icon>
-      <span class="btn-text">Select captains</span>
+      <span class="btn-text">Add Player</span>
     </button>
   </div>
 

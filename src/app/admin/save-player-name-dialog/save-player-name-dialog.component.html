@@ -1,0 +1,11 @@
+<form #savePlayerNameDialog="ngForm" name="savePlayerNameDialog">
+  <h1 mat-dialog-title class="dialog-title">{{dialogTitle}}</h1>
+  <mat-dialog-content>
+    <span>{{dialogInputLabel}}&nbsp;</span>
+    <input matInput [(ngModel)]="playerName" ngModel name="playerName" pattern="[A-Za-z ]*" required>
+  </mat-dialog-content>
+  <mat-dialog-actions align="center">
+    <button mat-flat-button color="primary" [disabled]="!savePlayerNameDialog.valid" (click)="setPlayerName()">Save</button>
+    <button mat-flat-button mat-dialog-close class="cancel-btn">Cancel</button>
+  </mat-dialog-actions>
+</form>

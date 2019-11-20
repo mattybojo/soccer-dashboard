@@ -1,3 +1,4 @@
+import { SavePlayerNameDialogComponent } from './../save-player-name-dialog/save-player-name-dialog.component';
 import { PlayerService } from './../../shared/services/player.service';
 import { TeamPicker, TeamType, TeamData } from './../../shared/models/team-picker.model';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -5,7 +6,7 @@ import { Observable, combineLatest } from 'rxjs';
 import { ChatComponent } from './../../team-picker/shared/chat/chat.component';
 import { Player } from './../../shared/models/player.model';
 import { TeamPickerService } from './../../shared/services/team-picker.service';
-import { faUserCheck, faUserMinus, faUser, faExclamationTriangle, faSave, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { faUserCheck, faUserMinus, faUser, faExclamationTriangle, faSave, faUserFriends, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { cloneDeep } from 'lodash';
 import { SaveMatchDialogComponent } from '../save-match-dialog/save-match-dialog.component';
 import { MatDialogRef, MatDialog } from '@angular/material';
@@ -29,11 +30,13 @@ export class AdminTeamPickerComponent implements OnInit {
   faUser = faUser;
   faExclamationTriangle = faExclamationTriangle;
   faSave = faSave;
+  faUserFriends = faUserFriends;
   faPlus = faPlus;
 
   disableCaptainPicker: boolean = true;
 
   saveMatchDialogRef: MatDialogRef<SaveMatchDialogComponent>;
+  savePlayerNameDialogRef: MatDialogRef<SavePlayerNameDialogComponent>;
 
   constructor(private teamPickerService: TeamPickerService, private playerService: PlayerService,
               private dialog: MatDialog) {}
@@ -124,6 +127,21 @@ export class AdminTeamPickerComponent implements OnInit {
     }
 
     return newTeam;
+  }
+
+  onAddPlayer() {
+    const self = this;
+
+    this.savePlayerNameDialogRef = this.dialog.open(SavePlayerNameDialogComponent, {
+      data: {
+        dialogTitle: 'Create New Player',
+        dialogInputLabel: 'Enter the new player\'s name'
+      }
+    });
+
+    this.savePlayerNameDialogRef.afterClosed().subscribe(result => {
+      self.playerService.createPlayer(result);
+    });
   }
 
   onPickCaptains() {
