@@ -140,7 +140,9 @@ export class AdminTeamPickerComponent implements OnInit {
     });
 
     this.savePlayerNameDialogRef.afterClosed().subscribe(result => {
-      self.playerService.createPlayer(result);
+      if (result) {
+        self.playerService.createPlayer(result);
+      }
     });
   }
 
