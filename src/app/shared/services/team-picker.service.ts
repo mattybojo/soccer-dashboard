@@ -1,4 +1,4 @@
-import { MotmVote } from './../models/team-picker.model';
+import { MotmVotesList } from './../models/team-picker.model';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { TeamPicker } from '../models/team-picker.model';
@@ -30,16 +30,16 @@ export class TeamPickerService {
     }
   }
 
-  getMotmVotes(): Observable<MotmVote> {
+  getMotmVotes(): Observable<MotmVotesList> {
     return this.db
       .collection('motmVotes')
       .snapshotChanges()
       .pipe(
-        map(snap => convertSnap<MotmVote>(snap))
+        map(snap => convertSnap<MotmVotesList>(snap))
       );
   }
 
-  submitMotmVote(vote: MotmVote): Observable<void> {
+  submitMotmVote(vote: MotmVotesList): Observable<void> {
     return from(this.db.doc(`motmVotes/${vote.id}`).update(Object.assign({}, vote)));
   }
 }

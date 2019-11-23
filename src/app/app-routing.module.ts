@@ -24,6 +24,9 @@ const routes: Routes = [{
 }, {
   path: 'changelog',
   loadChildren: './changelog/changelog.module#ChangelogModule'
+}, {
+  path: 'motm-voting',
+  loadChildren: './motm-voting/motm-voting.module#MotmVotingModule'
 }];
 
 @NgModule({

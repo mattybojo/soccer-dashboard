@@ -1,18 +1,18 @@
-import { ViewMotmVotesDialogComponent } from './../view-motm-votes-dialog/view-motm-votes-dialog.component';
-import { AuthService } from './../../shared/services/auth.service';
-import { TeamPicker, MotmVotesList, MotmVote } from './../../shared/models/team-picker.model';
-import { TeamPickerService } from './../../shared/services/team-picker.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable, combineLatest } from 'rxjs';
+import { TeamPicker, MotmVotesList } from 'src/app/shared/models/team-picker.model';
+import { TeamPickerService } from 'src/app/shared/services/team-picker.service';
 import { MatSnackBar, MatDialogRef, MatDialog } from '@angular/material';
-import { faSearchPlus } from '@fortawesome/free-solid-svg-icons';
+import { AuthService } from 'src/app/shared/services/auth.service';
+import { SavePlayerNameDialogComponent } from 'src/app/admin/save-player-name-dialog/save-player-name-dialog.component';
+import { UserData } from 'src/app/shared/models/user-data.model';
 
 @Component({
-  selector: 'app-admin-motm-voting',
-  templateUrl: './admin-motm-voting.component.html',
-  styleUrls: ['./admin-motm-voting.component.scss']
+  selector: 'app-motm-voting',
+  templateUrl: './motm-voting.component.html',
+  styleUrls: ['./motm-voting.component.scss']
 })
-export class AdminMotmVotingComponent implements OnInit {
+export class MotmVotingComponent implements OnInit {
 
   darkTeamPlayers: string[];
   whiteTeamPlayers: string[];
@@ -20,9 +20,8 @@ export class AdminMotmVotingComponent implements OnInit {
   isSaving: boolean = false;
   teamData$: Observable<TeamPicker[]>;
   motmVotesList: MotmVotesList;
-  faSearchPlus = faSearchPlus;
 
-  viewMotmVotesDialogRef: MatDialogRef<ViewMotmVotesDialogComponent>;
+  savePlayerNameDialogRef: MatDialogRef<SavePlayerNameDialogComponent>;
 
   constructor(private teamPickerService: TeamPickerService, private snackBar: MatSnackBar,
               private authService: AuthService, private dialog: MatDialog) { }
@@ -53,32 +52,32 @@ export class AdminMotmVotingComponent implements OnInit {
     }
   }
 
-  onViewVotes() {
-    let motmVotes: MotmVote[] = null;
-    if (this.motmVotesList.votes && this.motmVotesList.votes.length > 0) {
-      motmVotes = [];
-      // Process votes
-      this.motmVotesList.votes.split(',').forEach((vote: string) => {
-        const tokens = vote.split(':');
-        motmVotes.push({ user: tokens[0], vote: tokens[1] });
-      });
-    }
-
-    this.viewMotmVotesDialogRef = this.dialog.open(ViewMotmVotesDialogComponent, {
-      data: {
-        voteData: motmVotes
-      }
-    });
-  }
-
   submitVote() {
     const self = this;
 
-    let userName: string = this.authService.getUser().name;
-    if (userName) {
-      userName = userName.split(' ')[0];
-    }
+    let userName: string;
+    const userData: UserData = this.authService.getUser();
+    if (userData) {
+      userName = userData.name.split(' ')[0];
+      this.saveVote(userName);
+    } else {
+      this.savePlayerNameDialogRef = this.dialog.open(SavePlayerNameDialogComponent, {
+        data: {
+          dialogTitle: 'Verify Your Vote',
+          dialogInputLabel: 'Enter your name'
+        }
+      });
 
+      this.savePlayerNameDialogRef.afterClosed().subscribe(result => {
+        if (result) {
+          self.saveVote(result);
+        }
+      });
+    }
+  }
+
+  saveVote(userName: string) {
+    const self = this;
     if (this.motmVotesList.votes === '') {
       this.motmVotesList.votes = `${userName}:${this.selectedPlayer}`;
     } else {

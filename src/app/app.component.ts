@@ -25,6 +25,7 @@ export class AppComponent implements OnInit {
     this.menuItems.push({ label: 'Dashboard', link: '/dashboard', icon: faTable });
     this.menuItems.push({ label: 'Matches', link: '/matches', icon: faFutbol, queryParams: {date: 'latest'} });
     this.menuItems.push({ label: 'Team Picker', link: '/team-picker', icon: faUsers });
+    this.menuItems.push({ label: 'MOTM Vote', link: '/motm-voting', icon: faStar });
     this.menuItems.push({ label: 'Changelog', link: '/changelog', icon: faClipboardList });
 
     this.authService.isAdmin().subscribe((isAdmin: boolean) => {
@@ -32,7 +33,7 @@ export class AppComponent implements OnInit {
         this.adminMenuItems = [];
         this.adminMenuItems.push({ label: 'Matches', link: '/admin/matches', icon: faFutbol });
         this.adminMenuItems.push({ label: 'Team Picker', link: '/admin/team-picker', icon: faUsers });
-        this.adminMenuItems.push({ label: 'MOTM', link: '/admin/motm', icon: faStar });
+        this.adminMenuItems.push({ label: 'MOTM Vote', link: '/admin/motm-voting', icon: faStar });
       }
     });
   }

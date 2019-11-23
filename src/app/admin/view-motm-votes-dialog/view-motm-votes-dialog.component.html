@@ -1,0 +1,28 @@
+<mat-dialog-content>
+    <div class="dialog-header">
+      <h2>MOTM Votes</h2>
+    </div>
+
+    <table>
+      <tr>
+        <th>Player</th>
+        <th>Votes</th>
+        <th>Voters</th>
+      </tr>
+      <ng-container *ngIf="data.voteData; else noDataTemplate">
+        <tr *ngFor="let voteEntry of sortedVoteData">
+          <td>{{ voteEntry.vote }}</td>
+          <td>{{ voteEntry.count }}</td>
+          <td>{{ voteEntry.voters }}</td>
+        </tr>
+      </ng-container>
+      <ng-template #noDataTemplate>
+        <tr>
+          <td colspan=3>No votes yet</td>
+        </tr>
+      </ng-template>
+    </table>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-flat-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

@@ -14,7 +14,7 @@ const routes: Routes = [{
   component: AdminMatchesComponent,
   canActivate: [AdminGuard]
 }, {
-  path: 'motm',
+  path: 'motm-voting',
   component: AdminMotmVotingComponent,
   canActivate: [AdminGuard]
 }];

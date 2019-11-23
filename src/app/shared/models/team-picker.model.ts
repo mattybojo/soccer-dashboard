@@ -20,7 +20,13 @@ export enum TeamType {
   REMAINING = 3
 }
 
-export class MotmVote {
+export class MotmVotesList {
   id?: string;
   votes: string;
+}
+
+export class MotmVote {
+  id?: string;
+  user: string;
+  vote: string;
 }
