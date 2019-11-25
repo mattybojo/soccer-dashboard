@@ -1,5 +1,3 @@
-import { MotmVote } from './../../shared/models/team-picker.model';
-import { groupBy, orderBy } from 'lodash';
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import * as _ from 'lodash';
@@ -24,7 +22,6 @@ export class ViewMotmVotesDialogComponent implements OnInit {
       .map((data, vote) => ({ vote: vote, count: data.length, voters: _.map(data, 'user').join(', ') }))
       .orderBy(group => group.count, ['desc'])
       .value();
-    console.log(this.sortedVoteData);
   }
 
 }
