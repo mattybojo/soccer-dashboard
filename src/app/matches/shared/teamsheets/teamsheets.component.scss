@@ -80,19 +80,23 @@ table {
 
 // Align tables
 .mat-column-goals {
-  width: 100px;
+  width: 50px;
+}
+
+.mat-column-assists {
+  width: 50px;
 }
 
 .mat-column-name {
-  width: 150px;
+  width: 100px;
 }
 
 .mat-column-header-white-team-score {
-  width: 250px;
+  width: 150px;
 }
 
 .mat-column-header-dark-team-score {
-  width: 250px;
+  width: 150px;
 }
 
 .mat-column-scored {

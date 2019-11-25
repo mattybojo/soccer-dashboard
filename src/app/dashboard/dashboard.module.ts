@@ -5,6 +5,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatSortModule } from '@angular/material/sort';
+import { MatSelectModule } from '@angular/material';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,7 +14,8 @@ import { MatSortModule } from '@angular/material/sort';
     CommonModule,
     MatTableModule,
     MatGridListModule,
-    MatSortModule
+    MatSortModule,
+    MatSelectModule,
   ]
 })
 export class DashboardModule { }

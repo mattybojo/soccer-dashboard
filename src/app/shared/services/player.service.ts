@@ -24,9 +24,9 @@ export class PlayerService {
       );
   }
 
-  getPlayerStats(): Observable<PlayerStats[]> {
+  getPlayerStats(season: string): Observable<PlayerStats[]> {
     return this.db.
-      collection('season1')
+      collection(season)
       .snapshotChanges()
       .pipe(
         map(snaps => convertSnaps<PlayerStats>(snaps))

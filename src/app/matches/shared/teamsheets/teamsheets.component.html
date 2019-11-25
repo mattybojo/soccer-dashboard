@@ -1,6 +1,13 @@
 <div class="teamsheets-container">
   <table mat-table [dataSource]="darkTeamDataSource" matSort #darkTeamSort="matSort" class="dark-team">
 
+    <ng-container matColumnDef="assists">
+      <th id="dark-assists" mat-header-cell *matHeaderCellDef arrowPosition='before' mat-sort-header>Assists</th>
+      <td mat-cell *matCellDef="let entry">
+        <fa-icon [icon]="faAdn" *ngFor="let item of [].constructor(entry.assists)"></fa-icon>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="goals">
       <th id="dark-goals" mat-header-cell *matHeaderCellDef arrowPosition='before' mat-sort-header>Goals</th>
       <td mat-cell *matCellDef="let entry">
@@ -19,7 +26,7 @@
     </ng-container>
 
     <ng-container matColumnDef="header-dark-team-score">
-      <th id="dark-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+      <th id="dark-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="3">
           Dark Team: {{darkTeamGoals}}<span *ngIf="whiteTeamPenalties || darkTeamPenalties">&nbsp;({{darkTeamPenalties}}) </span>
       </th>
     </ng-container>
@@ -47,8 +54,15 @@
         </td>
       </ng-container>
 
+      <ng-container matColumnDef="assists">
+        <th id="dark-assists" mat-header-cell *matHeaderCellDef arrowPosition='after' mat-sort-header>Assists</th>
+        <td mat-cell *matCellDef="let entry">
+          <fa-icon [icon]="faAdn" *ngFor="let item of [].constructor(entry.assists)"></fa-icon>
+        </td>
+      </ng-container>
+
       <ng-container matColumnDef="header-white-team-score">
-        <th id="white-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="2">
+        <th id="white-team-goals" mat-header-cell *matHeaderCellDef [attr.colspan]="3">
           <span *ngIf="whiteTeamPenalties || darkTeamPenalties"> ({{whiteTeamPenalties}})&nbsp;</span>{{whiteTeamGoals}}: White Team
         </th>
       </ng-container>

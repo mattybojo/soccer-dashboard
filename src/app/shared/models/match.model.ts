@@ -9,12 +9,14 @@ export class Match {
 export class Team {
   players: string;
   goals: string;
+  assists?: string;
   penalties?: string;
 }
 
 export class MatchPlayer {
   name: string;
   goals: number;
+  assists: number;
   ownGoals: number;
   isCaptain: boolean;
   isMotm: boolean;
