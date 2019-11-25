@@ -16,7 +16,7 @@ export class ViewMotmVotesDialogComponent implements OnInit {
               @Inject(MAT_DIALOG_DATA) private _data) { }
 
   ngOnInit() {
-    this.data = this._data
+    this.data = this._data;
     this.sortedVoteData = _(this.data.voteData)
       .groupBy(data => data.vote)
       .map((data, vote) => ({ vote: vote, count: data.length, voters: _.map(data, 'user').join(', ') }))
