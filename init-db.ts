@@ -15,7 +15,8 @@ const db = firebase.firestore();
 
 async function uploadData() {
   uploadPlayers();
-  uploadStats();
+  uploadStatsSeason1();
+  uploadStatsSeason2();
   uploadMatches();
   uploadTeamPicker();
   uploadChats();
@@ -33,7 +34,7 @@ async function uploadPlayers() {
   });
 }
 
-async function uploadStats() {
+async function uploadStatsSeason1() {
   const season1 = db.collection('season1');
 
   season1.add({
@@ -397,11 +398,392 @@ async function uploadStats() {
   });
 }
 
+async function uploadStatsSeason2() {
+  const season2 = db.collection('season2');
+
+  season2.add({
+    name: 'Akachi',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Anson',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Christian',
+    wins: 2,
+    captainWins: 0,
+    goals: 2,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Cosmin',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Daniel',
+    wins: 1,
+    captainWins: 0,
+    goals: 2,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 1,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'Eric',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Fernando',
+    wins: 2,
+    captainWins: 1,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 1,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'Goce',
+    wins: 1,
+    captainWins: 0,
+    goals: 1,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Hamid',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'Igor',
+    wins: 1,
+    captainWins: 1,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Jason',
+    wins: 1,
+    captainWins: 1,
+    goals: 1,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 0,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'JM',
+    wins: 1,
+    captainWins: 0,
+    goals: 1,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Joe',
+    wins: 3,
+    captainWins: 0,
+    goals: 4,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 1,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'Johan',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'John',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Kenneth',
+    wins: 2,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Matt Bojo',
+    wins: 2,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Mike',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Nawid',
+    wins: 1,
+    captainWins: 0,
+    goals: 2,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Pedro',
+    wins: 2,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 0,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'Quais',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Sab',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Shane',
+    wins: 2,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 1,
+    assists: 1
+  });
+
+  season2.add({
+    name: 'Sundev',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Uffe',
+    wins: 1,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Vishnu',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Vlad',
+    wins: 1,
+    captainWins: 0,
+    goals: 3,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Walt',
+    wins: 2,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
+    cleanSheets: 1,
+    assists: 2
+  });
+
+  season2.add({
+    name: 'Zoran',
+    wins: 1,
+    captainWins: 0,
+    goals: 1,
+    ownGoals: 0,
+    gamesPlayed: 3,
+    cleanSheets: 1,
+    assists: 0
+  });
+}
+
 async function uploadMatches() {
   const matches = db.collection('matches');
 
   matches.add({
-    date: '10-19-2018',
+    date: '11-23-2019',
+    whiteTeam: {
+      players: 'Anson,Jason,Johan,Kenneth,Daniel,Mike,Nawid,Uffe,Hamid,Zoran',
+      goals: 'Nawid,Nawid',
+      assists: 'Jason,Hamid'
+    },
+    darkTeam: {
+      players: 'Igor,Christian,Shane,Sab,Pedro,Joe,JM,John,Goce,Cosmin',
+      goals: 'Joe,Christian,JM',
+      assists: 'Pedro'
+    },
+    motm: ''
+  });
+
+  matches.add({
+    date: '11-16-2019',
+    whiteTeam: {
+      players: 'Fernando,Shane,Johan,Kenneth,Nawid,Joe,Matt Bojo,Eric,Walt,Zoran,Akachi,Daniel',
+      goals: 'Joe,Joe,Daniel,Joe,Daniel',
+      assists: 'Shane,Daniel,Joe'
+    },
+    darkTeam: {
+      players: 'Sundev,Christian,Jason,Hamid,Vlad,Pedro,Sab,John,Cosmin,Uffe,Anson,JM',
+      goals: '',
+      assists: ''
+    },
+    motm: 'Kenneth'
+  });
+
+  matches.add({
+    date: '11-02-2019',
+    whiteTeam: {
+      players: 'Vishnu,Zoran,Shane,Johan,Quais,Mike,Goce,John,Nawid,Akachi,-',
+      goals: 'Zoran,Goce',
+      assists: ''
+    },
+    darkTeam: {
+      players: 'Jason,Pedro,Christian,Vlad,Walt,Kenneth,Fernando,Uffe,Joe,Matt Bojo,Anson',
+      goals: 'Vlad,Vlad,Christian,Vlad,Jason',
+      assists: 'Walt,Walt,Fernando'
+    },
+    motm: 'Vlad'
+  });
+
+  matches.add({
+    date: '10-26-2019',
+    whiteTeam: {
+      players: 'Pedro,Christian,JM,Fernando,Kenneth,Joe,Nawid,Matt Bojo, Matt Brunson,Ashan,Anson',
+      goals: 'JM,Pedro',
+    },
+    darkTeam: {
+      players: 'Uffe,Shane,Johan,Sab,Daniel,John,Mike,Matt Weaver,Goce,Zoran,Vishnu',
+      goals: 'Daniel,Mike,Mike'
+    },
+    motm: ''
+  });
+
+  matches.add({
+    date: '10-19-2019',
     whiteTeam: {
       players: 'Zoran,Christian,JM,Sab,Sundev,Joe,Kenneth,Matt Bojo,Nawid,Uffe,Akachi',
       goals: 'Joe'
@@ -414,7 +796,7 @@ async function uploadMatches() {
   });
 
   matches.add({
-    date: '10-12-2018',
+    date: '10-12-2019',
     whiteTeam: {
       players: 'Cosmin,Sab,Goce,Kenneth,Dan,Eric,Joe,Anson,Zoran',
       goals: 'Sab,Kenneth,Sab,Joe'
