@@ -402,6 +402,17 @@ async function uploadStatsSeason2() {
   const season2 = db.collection('season2');
 
   season2.add({
+    name: 'Aaron',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
     name: 'Akachi',
     wins: 1,
     captainWins: 0,
@@ -671,7 +682,7 @@ async function uploadStatsSeason2() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 2,
     cleanSheets: 0,
     assists: 0
   });
@@ -727,7 +738,7 @@ async function uploadMatches() {
   matches.add({
     date: '11-23-2019',
     whiteTeam: {
-      players: 'Anson,Jason,Johan,Kenneth,Daniel,Mike,Nawid,Uffe,Hamid,Zoran',
+      players: 'Anson,Jason,Johan,Kenneth,Daniel,Mike,Nawid,Aaron,Hamid,Zoran',
       goals: 'Nawid,Nawid',
       assists: 'Jason,Hamid'
     },
