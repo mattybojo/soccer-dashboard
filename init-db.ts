@@ -403,12 +403,12 @@ async function uploadStatsSeason2() {
 
   season2.add({
     name: 'Aaron',
-    wins: 0,
+    wins: 2,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 1,
-    cleanSheets: 0,
+    gamesPlayed: 4,
+    cleanSheets: 1,
     assists: 0
   });
 
@@ -425,22 +425,33 @@ async function uploadStatsSeason2() {
 
   season2.add({
     name: 'Anson',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 6,
+    cleanSheets: 0,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Ashan',
+    wins: 0,
+    captainWins: 0,
+    goals: 0,
+    ownGoals: 0,
+    gamesPlayed: 2,
     cleanSheets: 0,
     assists: 0
   });
 
   season2.add({
     name: 'Christian',
-    wins: 2,
+    wins: 3,
     captainWins: 0,
     goals: 2,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 4,
     cleanSheets: 0,
     assists: 0
   });
@@ -458,22 +469,22 @@ async function uploadStatsSeason2() {
 
   season2.add({
     name: 'Daniel',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
     goals: 2,
     ownGoals: 0,
-    gamesPlayed: 2,
-    cleanSheets: 1,
+    gamesPlayed: 3,
+    cleanSheets: 2,
     assists: 1
   });
 
   season2.add({
     name: 'Eric',
-    wins: 1,
-    captainWins: 0,
+    wins: 2,
+    captainWins: 1,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 1,
+    gamesPlayed: 3,
     cleanSheets: 1,
     assists: 0
   });
@@ -482,9 +493,9 @@ async function uploadStatsSeason2() {
     name: 'Fernando',
     wins: 2,
     captainWins: 1,
-    goals: 0,
+    goals: 1,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 4,
     cleanSheets: 1,
     assists: 1
   });
@@ -495,18 +506,18 @@ async function uploadStatsSeason2() {
     captainWins: 0,
     goals: 1,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 4,
     cleanSheets: 0,
     assists: 0
   });
 
   season2.add({
     name: 'Hamid',
-    wins: 0,
+    wins: 1,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 3,
     cleanSheets: 0,
     assists: 1
   });
@@ -517,31 +528,31 @@ async function uploadStatsSeason2() {
     captainWins: 1,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 1,
+    gamesPlayed: 2,
     cleanSheets: 0,
     assists: 0
   });
 
   season2.add({
     name: 'Jason',
-    wins: 1,
+    wins: 3,
     captainWins: 1,
-    goals: 1,
+    goals: 3,
     ownGoals: 0,
-    gamesPlayed: 3,
-    cleanSheets: 0,
-    assists: 1
+    gamesPlayed: 5,
+    cleanSheets: 1,
+    assists: 2
   });
 
   season2.add({
     name: 'JM',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
-    goals: 1,
+    goals: 3,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 5,
     cleanSheets: 0,
-    assists: 0
+    assists: 1
   });
 
   season2.add({
@@ -550,40 +561,40 @@ async function uploadStatsSeason2() {
     captainWins: 0,
     goals: 4,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 6,
     cleanSheets: 1,
-    assists: 1
+    assists: 2
   });
 
   season2.add({
     name: 'Johan',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 5,
     cleanSheets: 1,
     assists: 0
   });
 
   season2.add({
     name: 'John',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 6,
     cleanSheets: 0,
     assists: 0
   });
 
   season2.add({
     name: 'Kenneth',
-    wins: 2,
+    wins: 3,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 5,
     cleanSheets: 1,
     assists: 0
   });
@@ -594,7 +605,7 @@ async function uploadStatsSeason2() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 4,
     cleanSheets: 1,
     assists: 0
   });
@@ -605,30 +616,30 @@ async function uploadStatsSeason2() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 5,
     cleanSheets: 0,
     assists: 0
   });
 
   season2.add({
     name: 'Nawid',
-    wins: 1,
-    captainWins: 0,
-    goals: 2,
+    wins: 4,
+    captainWins: 1,
+    goals: 5,
     ownGoals: 0,
-    gamesPlayed: 3,
-    cleanSheets: 1,
+    gamesPlayed: 6,
+    cleanSheets: 2,
     assists: 0
   });
 
   season2.add({
     name: 'Pedro',
-    wins: 2,
-    captainWins: 0,
+    wins: 3,
+    captainWins: 1,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
-    cleanSheets: 0,
+    gamesPlayed: 4,
+    cleanSheets: 1,
     assists: 1
   });
 
@@ -645,12 +656,23 @@ async function uploadStatsSeason2() {
 
   season2.add({
     name: 'Sab',
+    wins: 4,
+    captainWins: 0,
+    goals: 1,
+    ownGoals: 0,
+    gamesPlayed: 5,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
+    name: 'Sam Chase',
     wins: 1,
     captainWins: 0,
-    goals: 0,
+    goals: 1,
     ownGoals: 0,
     gamesPlayed: 2,
-    cleanSheets: 0,
+    cleanSheets: 1,
     assists: 0
   });
 
@@ -660,18 +682,29 @@ async function uploadStatsSeason2() {
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 3,
+    gamesPlayed: 6,
     cleanSheets: 1,
     assists: 1
   });
 
   season2.add({
+    name: 'Soliman',
+    wins: 1,
+    captainWins: 0,
+    goals: 1,
+    ownGoals: 0,
+    gamesPlayed: 1,
+    cleanSheets: 1,
+    assists: 0
+  });
+
+  season2.add({
     name: 'Sundev',
-    wins: 0,
+    wins: 1,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 1,
+    gamesPlayed: 2,
     cleanSheets: 0,
     assists: 0
   });
@@ -689,46 +722,46 @@ async function uploadStatsSeason2() {
 
   season2.add({
     name: 'Vishnu',
-    wins: 0,
+    wins: 1,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 1,
+    gamesPlayed: 2,
     cleanSheets: 0,
     assists: 0
   });
 
   season2.add({
     name: 'Vlad',
-    wins: 1,
+    wins: 2,
     captainWins: 0,
-    goals: 3,
+    goals: 4,
     ownGoals: 0,
-    gamesPlayed: 2,
-    cleanSheets: 0,
+    gamesPlayed: 4,
+    cleanSheets: 1,
     assists: 0
   });
 
   season2.add({
     name: 'Walt',
-    wins: 2,
+    wins: 4,
     captainWins: 0,
     goals: 0,
     ownGoals: 0,
-    gamesPlayed: 2,
+    gamesPlayed: 4,
     cleanSheets: 1,
-    assists: 2
+    assists: 3
   });
 
   season2.add({
     name: 'Zoran',
-    wins: 1,
+    wins: 4,
     captainWins: 0,
     goals: 1,
     ownGoals: 0,
-    gamesPlayed: 3,
-    cleanSheets: 1,
-    assists: 0
+    gamesPlayed: 6,
+    cleanSheets: 2,
+    assists: 1
   });
 }
 
